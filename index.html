@@ -94,7 +94,9 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
       <div class="mini-panel">
         <strong>Delivery details</strong>
         <div style="height:.55rem"></div>
-        <input id="addressInput" placeholder="Enter your address" value="Jakarta Selatan">
+        <input id="customerNameInput" placeholder="Enter your WhatsApp name" value="Budi Santoso">
+        <div style="height:.45rem"></div>
+        <input id="addressInput" placeholder="Enter detailed address" value="Jl. Kemang Raya No. 12, Jakarta Selatan">
         <div style="height:.55rem"></div>
         <span class="status" id="etaStatus">Estimated arrival: 25 mins</span>
       </div>
@@ -128,7 +130,7 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
   <div id="cartItems"></div>
   <div class="total" id="cartTotal">Total: $0</div>
   <button class="checkout-btn" id="checkoutBtn" onclick="checkoutViaWhatsApp()">Place order (auto WhatsApp)</button>
-  <p class="note" id="checkoutNote">Tip: update your address before checkout so order notes are sent correctly.</p>
+  <p class="note" id="checkoutNote">Tip: fill in your WhatsApp name and detailed address before checkout so your order message is complete.</p>
 </div>
 <script>
 const foods = [
@@ -268,7 +270,13 @@ function checkoutViaWhatsApp(){
 
   const checkoutBtn = document.getElementById("checkoutBtn");
   const checkoutNote = document.getElementById("checkoutNote");
-  const address = document.getElementById("addressInput").value.trim() || "No address provided";
+  const customerName = document.getElementById("customerNameInput").value.trim();
+  const address = document.getElementById("addressInput").value.trim();
+
+  if(!customerName || !address){
+    alert("Please enter your WhatsApp name and detailed address before checkout.");
+    return;
+  }
   const total = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
 
   const orderText = [
@@ -277,7 +285,8 @@ function checkoutViaWhatsApp(){
     ...cart.map(item => `- ${item.name} x${item.qty} (${formatIDRFromUSD(item.qty * item.price)})`),
     "",
     `Total: ${formatIDRFromUSD(total)}`,
-    `Address: ${address}`,
+    `WhatsApp Name: ${customerName}`,
+    `Detailed Address: ${address}`,
     "Ordered from FreshBite web app."
   ].join("\n");
 
