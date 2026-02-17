@@ -31,6 +31,7 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
 .search-bar input,.tools select,.mini-panel input{border:none;outline:none;flex:1;font-size:1rem;background:transparent}
 .tools{display:flex;gap:.75rem;align-items:center;justify-content:space-between}
 .tools label{font-size:.85rem;color:var(--muted);display:block}
+.input-label{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.25rem;font-weight:600}
 .tools select{border:1px solid var(--border);padding:.35rem .45rem;border-radius:8px;background:#fff}
 .categories{display:flex;gap:.5rem;overflow-x:auto;padding:1rem 0}
 .chip{background:#fff;border:1px solid var(--border);padding:.5rem .9rem;border-radius:999px;cursor:pointer;white-space:nowrap;font-size:.9rem}
@@ -94,9 +95,17 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
       <div class="mini-panel">
         <strong>Delivery details</strong>
         <div style="height:.55rem"></div>
+
+        <label for="customerNameInput" class="input-label">WhatsApp name</label>
+        <input id="customerNameInput" placeholder="Enter your WhatsApp name">
+        <div style="height:.45rem"></div>
+        <label for="addressInput" class="input-label">Detailed address</label>
+        <input id="addressInput" placeholder="Enter detailed address">
+=======
         <input id="customerNameInput" placeholder="Enter your WhatsApp name" value="Budi Santoso">
         <div style="height:.45rem"></div>
         <input id="addressInput" placeholder="Enter detailed address" value="Jl. Kemang Raya No. 12, Jakarta Selatan">
+
         <div style="height:.55rem"></div>
         <span class="status" id="etaStatus">Estimated arrival: 25 mins</span>
       </div>
@@ -130,7 +139,11 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
   <div id="cartItems"></div>
   <div class="total" id="cartTotal">Total: $0</div>
   <button class="checkout-btn" id="checkoutBtn" onclick="checkoutViaWhatsApp()">Place order (auto WhatsApp)</button>
+
+  <p class="note" id="checkoutNote">Tip: you can change your WhatsApp name and detailed address in Delivery details before checkout.</p>
+=======
   <p class="note" id="checkoutNote">Tip: fill in your WhatsApp name and detailed address before checkout so your order message is complete.</p>
+
 </div>
 <script>
 const foods = [
@@ -300,6 +313,12 @@ function checkoutViaWhatsApp(){
   setTimeout(() => {
     window.location.href = whatsappUrl;
   }, 350);
+
+  setTimeout(() => {
+    checkoutBtn.disabled = false;
+    checkoutBtn.innerText = "Place order (auto WhatsApp)";
+    checkoutNote.innerText = "Tip: you can change your WhatsApp name and detailed address in Delivery details before checkout.";
+  }, 4000);
 }
 
 function toggleCart(){
