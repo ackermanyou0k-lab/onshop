@@ -94,11 +94,11 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
       <div class="mini-panel">
         <strong>Delivery details</strong>
         <div style="height:.55rem"></div>
-        <input id="customerNameInput" placeholder="Enter your WhatsApp name" value="Budi Santoso">
+        <input id="customerNameInput" placeholder="Enter your WhatsApp name" value="">
         <div style="height:.45rem"></div>
-        <input id="addressInput" placeholder="Enter detailed address" value="Jl. Kemang Raya No. 12, Jakarta Selatan">
+        <input id="addressInput" placeholder="Enter detailed address" value="">
         <div style="height:.55rem"></div>
-        <span class="status" id="etaStatus">Estimated arrival: 25 mins</span>
+        <span class="status" id="etaStatus">Estimated arrival: 30 mins</span>
       </div>
     </div>
     <div class="tools" style="margin-top:.7rem">
@@ -120,7 +120,7 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
     <div class="social-grid">
       <a href="https://www.tiktok.com/@freshbite" target="_blank" rel="noopener noreferrer">🎵 Connect TikTok<br><small>Promote menu videos & live selling.</small></a>
       <a href="https://www.instagram.com/freshbite" target="_blank" rel="noopener noreferrer">📸 Connect Instagram<br><small>Share reels, stories, and catalog.</small></a>
-      <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">💬 Connect WhatsApp<br><small>Receive order chat and customer support.</small></a>
+      <a href="https://wa.me/6289504378484" target="_blank" rel="noopener noreferrer">💬 Connect WhatsApp<br><small>Receive order chat and customer support.</small></a>
     </div>
   </section>
 </main>
@@ -134,15 +134,15 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
 </div>
 <script>
 const foods = [
-  {id:1,name:"Burger House",category:"Burger",price:1.25,rating:4.7,eta:20,orders:320,img:"https://images.unsplash.com/photo-1600891964599-f61ba0e24092"},
-  {id:2,name:"Green Bowl",category:"Healthy",price:2,rating:4.9,eta:22,orders:280,img:"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"},
-  {id:3,name:"Sushi Master",category:"Sushi",price:0.5,rating:4.8,eta:27,orders:180,img:"https://images.unsplash.com/photo-1562967916-eb82221dfb92"},
-  {id:4,name:"Chicken Burger",category:"Burger",price:3,rating:4.6,eta:18,orders:410,img:"https://images.unsplash.com/photo-1550547660-d9450f859349"},
-  {id:5,name:"Morning Latte",category:"Coffee",price:2,rating:4.8,eta:15,orders:510,img:"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"}
+  {id:1,name:"Burger House",category:"Burger",price:20,rating:4.7,eta:20,orders:320,img:"https://images.unsplash.com/photo-1600891964599-f61ba0e24092"},
+  {id:2,name:"Green Bowl",category:"Healthy",price:10,rating:4.9,eta:22,orders:280,img:"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"},
+  {id:3,name:"Sushi Master",category:"Sushi",price:5,rating:4.8,eta:27,orders:180,img:"https://images.unsplash.com/photo-1562967916-eb82221dfb92"},
+  {id:4,name:"Chicken Burger",category:"Burger",price:15,rating:4.6,eta:18,orders:410,img:"https://images.unsplash.com/photo-1550547660-d9450f859349"},
+  {id:5,name:"Morning Latte",category:"Coffee",price:8,rating:4.8,eta:15,orders:510,img:"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"}
 ];
 let cart = [];
 let currentCategory = "All";
-const USD_TO_IDR = 16000;
+const USD_TO_IDR = 1000;
 
 function formatIDRFromUSD(usdAmount){
   const idrAmount = Math.round(usdAmount * USD_TO_IDR);
@@ -285,7 +285,7 @@ function checkoutViaWhatsApp(){
     ...cart.map(item => `- ${item.name} x${item.qty} (${formatIDRFromUSD(item.qty * item.price)})`),
     "",
     `Total: ${formatIDRFromUSD(total)}`,
-    `WhatsApp Name: ${customerName}`,
+    `Name: ${customerName}`,
     `Detailed Address: ${address}`,
     "Ordered from FreshBite web app."
   ].join("\n");
