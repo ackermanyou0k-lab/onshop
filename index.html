@@ -140,6 +140,12 @@ const foods = [
 ];
 let cart = [];
 let currentCategory = "All";
+const USD_TO_IDR = 16000;
+
+function formatIDRFromUSD(usdAmount){
+  const idrAmount = Math.round(usdAmount * USD_TO_IDR);
+  return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(idrAmount);
+}
 
 function getFilteredFoods(){
   const search = document.getElementById("searchInput").value.toLowerCase();
@@ -171,7 +177,7 @@ function renderItems(){
             <div class="meta">${food.category} • ${food.eta} min</div>
             <div class="rating">⭐ ${food.rating}</div>
           </div>
-          <div class="quick">${food.orders}+ orders this week <span class="price">$${food.price}</span></div>
+          <div class="quick">${food.orders}+ orders this week <span class="price">${formatIDRFromUSD(food.price)}</span></div>
           <button class="add-btn" onclick="addToCart(${food.id})">${inCart ? 'Add more' : 'Add to cart'}</button>
         </div>
       </div>
@@ -226,10 +232,10 @@ function updateCart(){
       <div class="cart-item">
         <div>
           <h4>${item.name}</h4>
-          <div class="note">$${item.price} each</div>
+          <div class="note">${formatIDRFromUSD(item.price)} each</div>
         </div>
         <div style="text-align:right">
-          <div><strong>$${lineTotal}</strong></div>
+          <div><strong>${formatIDRFromUSD(lineTotal)}</strong></div>
           <div class="qty-row">
             <button onclick="changeQty(${item.id},-1)">-</button>
             <span>${item.qty}</span>
@@ -245,7 +251,7 @@ function updateCart(){
   }
 
   cartCount.innerText = count;
-  cartTotal.innerText = `Total: $${total}`;
+  cartTotal.innerText = `Total: ${formatIDRFromUSD(total)}`;
 }
 
 function updateEta(){
@@ -268,9 +274,9 @@ function checkoutViaWhatsApp(){
   const orderText = [
     "Hi FreshBite!",
     "I want to order:",
-    ...cart.map(item => `- ${item.name} x${item.qty} ($${item.qty * item.price})`),
+    ...cart.map(item => `- ${item.name} x${item.qty} (${formatIDRFromUSD(item.qty * item.price)})`),
     "",
-    `Total: $${total}`,
+    `Total: ${formatIDRFromUSD(total)}`,
     `Address: ${address}`,
     "Ordered from FreshBite web app."
   ].join("\n");
