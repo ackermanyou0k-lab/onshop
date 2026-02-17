@@ -4,309 +4,287 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FreshBite Interactive</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
 <style>
 :root{
   --primary:#06c167;
+  --primary-dark:#049e53;
   --text:#111;
   --muted:#6b6b6b;
-  --border:#eee;
-  --bg:#fafafa;
+  --border:#ececec;
+  --bg:#f7f7f7;
+  --warning:#ff8c42;
 }
-
 *{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:"Inter",sans-serif;
-  background:var(--bg);
-}
-
-.container{
-  width:min(1200px,92%);
-  margin:auto;
-}
-
-header{
-  background:#fff;
-  border-bottom:1px solid var(--border);
-  position:sticky;
-  top:0;
-  z-index:50;
-}
-
-.nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:1rem 0;
-}
-
-.brand{
-  font-weight:800;
-  font-size:1.2rem;
-}
-
-.cart-btn{
-  position:relative;
-  cursor:pointer;
-  font-weight:600;
-}
-
-.cart-count{
-  position:absolute;
-  top:-8px;
-  right:-10px;
-  background:var(--primary);
-  color:#fff;
-  font-size:.75rem;
-  padding:2px 6px;
-  border-radius:999px;
-}
-
-.hero{
-  padding:2rem 0 1rem;
-}
-
-.search-bar{
-  background:#fff;
-  border-radius:999px;
-  padding:.7rem 1rem;
-  display:flex;
-  border:1px solid var(--border);
-}
-
-.search-bar input{
-  border:none;
-  outline:none;
-  flex:1;
-  font-size:1rem;
-}
-
-.categories{
-  display:flex;
-  gap:.5rem;
-  overflow-x:auto;
-  padding:1rem 0;
-}
-
-.chip{
-  background:#fff;
-  border:1px solid var(--border);
-  padding:.5rem 1rem;
-  border-radius:999px;
-  cursor:pointer;
-  white-space:nowrap;
-}
-
-.chip.active{
-  background:var(--primary);
-  color:#fff;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
-  gap:1rem;
-  margin-top:1rem;
-}
-
-.card{
-  background:#fff;
-  border-radius:16px;
-  overflow:hidden;
-  box-shadow:0 8px 20px rgba(0,0,0,.05);
-}
-
-.card img{
-  width:100%;
-  height:160px;
-  object-fit:cover;
-}
-
-.card-content{
-  padding:1rem;
-}
-
-.card h3{
-  margin:0 0 .5rem;
-}
-
-.meta{
-  color:var(--muted);
-  font-size:.9rem;
-  margin-bottom:.5rem;
-}
-
-.price{
-  font-weight:700;
-  margin-bottom:.5rem;
-}
-
-.add-btn{
-  width:100%;
-  padding:.6rem;
-  border:none;
-  border-radius:8px;
-  background:var(--primary);
-  color:#fff;
-  cursor:pointer;
-  font-weight:600;
-}
-
-/* CART PANEL */
-.cart-panel{
-  position:fixed;
-  top:0;
-  right:-400px;
-  width:350px;
-  height:100%;
-  background:#fff;
-  box-shadow:-5px 0 20px rgba(0,0,0,.1);
-  padding:1rem;
-  transition:.3s;
-  overflow-y:auto;
-  z-index:100;
-}
-
-.cart-panel.open{
-  right:0;
-}
-
-.cart-item{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:.8rem;
-}
-
-.total{
-  font-weight:700;
-  margin-top:1rem;
-}
-
-.close-cart{
-  cursor:pointer;
-  font-weight:600;
-  margin-bottom:1rem;
-  display:inline-block;
+body{margin:0;font-family:"Inter",sans-serif;background:var(--bg);color:var(--text)}
+.container{width:min(1200px,92%);margin:auto}
+header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;gap:1rem;flex-wrap:wrap}
+.brand{font-weight:800;font-size:1.2rem;display:flex;align-items:center;gap:.4rem}
+.pill{padding:.4rem .75rem;border-radius:999px;border:1px solid var(--border);font-size:.8rem;color:var(--muted)}
+.cart-btn{position:relative;cursor:pointer;font-weight:700;background:#111;color:#fff;padding:.55rem .95rem;border-radius:999px}
+.cart-count{position:absolute;top:-8px;right:-8px;background:var(--primary);color:#fff;font-size:.75rem;padding:2px 6px;border-radius:999px}
+.hero{padding:1.3rem 0 .7rem}
+.hero-grid{display:grid;grid-template-columns:2fr 1fr;gap:1rem}
+.search-bar,.mini-panel,.tools{background:#fff;border-radius:14px;padding:.8rem 1rem;border:1px solid var(--border)}
+.search-bar{display:flex;align-items:center;gap:.5rem}
+.search-bar input,.tools select,.mini-panel input{border:none;outline:none;flex:1;font-size:1rem;background:transparent}
+.tools{display:flex;gap:.75rem;align-items:center;justify-content:space-between}
+.tools label{font-size:.85rem;color:var(--muted);display:block}
+.tools select{border:1px solid var(--border);padding:.35rem .45rem;border-radius:8px;background:#fff}
+.categories{display:flex;gap:.5rem;overflow-x:auto;padding:1rem 0}
+.chip{background:#fff;border:1px solid var(--border);padding:.5rem .9rem;border-radius:999px;cursor:pointer;white-space:nowrap;font-size:.9rem}
+.chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin:1rem 0 1.5rem}
+.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,.05);border:1px solid #f0f0f0;display:flex;flex-direction:column}
+.card img{width:100%;height:160px;object-fit:cover}
+.card-content{padding:1rem;display:flex;flex-direction:column;gap:.45rem;flex:1}
+.card h3{margin:0;font-size:1.05rem}
+.meta{color:var(--muted);font-size:.9rem}
+.meta-row{display:flex;justify-content:space-between;align-items:center}
+.rating{font-weight:700;font-size:.9rem}
+.price{font-weight:800;font-size:1.1rem}
+.quick{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;color:var(--muted)}
+.add-btn,.ghost-btn{width:100%;padding:.62rem;border:none;border-radius:8px;cursor:pointer;font-weight:700}
+.add-btn{background:var(--primary);color:#fff}
+.add-btn:hover{background:var(--primary-dark)}
+.ghost-btn{background:#f1fff8;color:var(--primary-dark)}
+.social{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1rem;margin-bottom:1.5rem}
+.social h3{margin:0 0 .6rem}
+.social-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.6rem}
+.social a{display:block;text-decoration:none;color:#111;border:1px solid var(--border);padding:.6rem .7rem;border-radius:10px;font-weight:600;background:#fafafa}
+.social small{color:var(--muted)}
+.cart-panel{position:fixed;top:0;right:-420px;width:380px;max-width:95vw;height:100%;background:#fff;box-shadow:-5px 0 20px rgba(0,0,0,.1);padding:1rem;transition:.3s;overflow-y:auto;z-index:100}
+.cart-panel.open{right:0}
+.cart-item{display:grid;grid-template-columns:1fr auto;gap:.3rem;padding:.7rem 0;border-bottom:1px dashed var(--border)}
+.cart-item h4{margin:0;font-size:.95rem}
+.qty-row{display:flex;gap:.3rem;align-items:center}
+.qty-row button{border:1px solid var(--border);background:#fff;padding:.1rem .45rem;border-radius:6px;cursor:pointer}
+.total{font-weight:800;margin-top:1rem}
+.close-cart{cursor:pointer;font-weight:600;margin-bottom:1rem;display:inline-block}
+.checkout-btn{margin-top:.8rem;background:#111;color:#fff;border:none;border-radius:8px;padding:.7rem;width:100%;font-weight:700;cursor:pointer}
+.checkout-btn:disabled{opacity:.75;cursor:not-allowed}
+.note{font-size:.82rem;color:var(--muted)}
+.status{padding:.4rem .7rem;background:#fff4ec;color:#b85b14;border-radius:10px;border:1px solid #ffd9bd;font-size:.82rem;display:inline-block}
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
-
 <body>
-
 <header>
   <div class="container nav">
-    <div class="brand">FreshBite</div>
-    <div class="cart-btn" onclick="toggleCart()">
-      🛒 Cart
-      <span class="cart-count" id="cartCount">0</span>
-    </div>
+    <div class="brand">🍽️ FreshBite <span class="pill">Live delivery mode</span></div>
+    <div class="cart-btn" onclick="toggleCart()">🛒 Order <span class="cart-count" id="cartCount">0</span></div>
   </div>
 </header>
-
 <main class="container">
-
-<section class="hero">
-  <div class="search-bar">
-    🔍 <input type="text" id="searchInput" placeholder="Search food..." oninput="renderItems()">
-  </div>
-</section>
-
-<section class="categories">
-  <div class="chip active" onclick="filterCategory('All', this)">All</div>
-  <div class="chip" onclick="filterCategory('Burger', this)">Burger</div>
-  <div class="chip" onclick="filterCategory('Healthy', this)">Healthy</div>
-  <div class="chip" onclick="filterCategory('Sushi', this)">Sushi</div>
-</section>
-
-<section class="grid" id="foodGrid"></section>
-
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="search-bar">🔍 <input type="text" id="searchInput" placeholder="Search menu or restaurant" oninput="renderItems()"></div>
+        <div class="categories">
+          <div class="chip active" onclick="filterCategory('All', this)">All</div>
+          <div class="chip" onclick="filterCategory('Burger', this)">Burger</div>
+          <div class="chip" onclick="filterCategory('Healthy', this)">Healthy</div>
+          <div class="chip" onclick="filterCategory('Sushi', this)">Sushi</div>
+          <div class="chip" onclick="filterCategory('Coffee', this)">Coffee</div>
+        </div>
+      </div>
+      <div class="mini-panel">
+        <strong>Delivery details</strong>
+        <div style="height:.55rem"></div>
+        <input id="addressInput" placeholder="Enter your address" value="Jakarta Selatan">
+        <div style="height:.55rem"></div>
+        <span class="status" id="etaStatus">Estimated arrival: 25 mins</span>
+      </div>
+    </div>
+    <div class="tools" style="margin-top:.7rem">
+      <div>
+        <label for="sortSelect">Sort</label>
+        <select id="sortSelect" onchange="renderItems()">
+          <option value="popular">Most popular</option>
+          <option value="priceLow">Price: low to high</option>
+          <option value="priceHigh">Price: high to low</option>
+          <option value="ratingHigh">Top rated</option>
+        </select>
+      </div>
+      <div class="note">Interactive ordering flow inspired by Uber Eats / GoFood.</div>
+    </div>
+  </section>
+  <section class="grid" id="foodGrid"></section>
+  <section class="social">
+    <h3>Connect your shop to social channels</h3>
+    <div class="social-grid">
+      <a href="https://www.tiktok.com/@freshbite" target="_blank" rel="noopener noreferrer">🎵 Connect TikTok<br><small>Promote menu videos & live selling.</small></a>
+      <a href="https://www.instagram.com/freshbite" target="_blank" rel="noopener noreferrer">📸 Connect Instagram<br><small>Share reels, stories, and catalog.</small></a>
+      <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">💬 Connect WhatsApp<br><small>Receive order chat and customer support.</small></a>
+    </div>
+  </section>
 </main>
-
-<!-- CART PANEL -->
 <div class="cart-panel" id="cartPanel">
   <div class="close-cart" onclick="toggleCart()">← Close</div>
-  <h3>Your Cart</h3>
+  <h3>Your order</h3>
   <div id="cartItems"></div>
   <div class="total" id="cartTotal">Total: $0</div>
+  <button class="checkout-btn" id="checkoutBtn" onclick="checkoutViaWhatsApp()">Place order (auto WhatsApp)</button>
+  <p class="note" id="checkoutNote">Tip: update your address before checkout so order notes are sent correctly.</p>
 </div>
-
 <script>
 const foods = [
-  {name:"Burger House", category:"Burger", price:8, img:"https://images.unsplash.com/photo-1600891964599-f61ba0e24092"},
-  {name:"Green Bowl", category:"Healthy", price:10, img:"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"},
-  {name:"Sushi Master", category:"Sushi", price:15, img:"https://images.unsplash.com/photo-1562967916-eb82221dfb92"},
-  {name:"Chicken Burger", category:"Burger", price:9, img:"https://images.unsplash.com/photo-1550547660-d9450f859349"},
+  {id:1,name:"Burger House",category:"Burger",price:8,rating:4.7,eta:20,orders:320,img:"https://images.unsplash.com/photo-1600891964599-f61ba0e24092"},
+  {id:2,name:"Green Bowl",category:"Healthy",price:10,rating:4.9,eta:22,orders:280,img:"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"},
+  {id:3,name:"Sushi Master",category:"Sushi",price:15,rating:4.8,eta:27,orders:180,img:"https://images.unsplash.com/photo-1562967916-eb82221dfb92"},
+  {id:4,name:"Chicken Burger",category:"Burger",price:9,rating:4.6,eta:18,orders:410,img:"https://images.unsplash.com/photo-1550547660-d9450f859349"},
+  {id:5,name:"Morning Latte",category:"Coffee",price:6,rating:4.8,eta:15,orders:510,img:"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"}
 ];
-
 let cart = [];
 let currentCategory = "All";
 
+function getFilteredFoods(){
+  const search = document.getElementById("searchInput").value.toLowerCase();
+  const sort = document.getElementById("sortSelect").value;
+  const filtered = foods
+    .filter(f => currentCategory === "All" || f.category === currentCategory)
+    .filter(f => f.name.toLowerCase().includes(search));
+
+  const sorters = {
+    popular:(a,b)=>b.orders-a.orders,
+    priceLow:(a,b)=>a.price-b.price,
+    priceHigh:(a,b)=>b.price-a.price,
+    ratingHigh:(a,b)=>b.rating-a.rating,
+  };
+  return filtered.sort(sorters[sort]);
+}
+
 function renderItems(){
   const grid = document.getElementById("foodGrid");
-  const search = document.getElementById("searchInput").value.toLowerCase();
-  grid.innerHTML="";
-
-  foods
-  .filter(f => (currentCategory==="All" || f.category===currentCategory))
-  .filter(f => f.name.toLowerCase().includes(search))
-  .forEach(food=>{
-    grid.innerHTML+=`
+  grid.innerHTML = "";
+  getFilteredFoods().forEach(food => {
+    const inCart = cart.find(item => item.id === food.id);
+    grid.innerHTML += `
       <div class="card">
-        <img src="${food.img}">
+        <img src="${food.img}" alt="${food.name}">
         <div class="card-content">
           <h3>${food.name}</h3>
-          <div class="meta">${food.category}</div>
-          <div class="price">$${food.price}</div>
-          <button class="add-btn" onclick="addToCart('${food.name}', ${food.price})">Add to Cart</button>
+          <div class="meta-row">
+            <div class="meta">${food.category} • ${food.eta} min</div>
+            <div class="rating">⭐ ${food.rating}</div>
+          </div>
+          <div class="quick">${food.orders}+ orders this week <span class="price">$${food.price}</span></div>
+          <button class="add-btn" onclick="addToCart(${food.id})">${inCart ? 'Add more' : 'Add to cart'}</button>
         </div>
       </div>
     `;
   });
+  updateEta();
 }
 
 function filterCategory(category, el){
-  currentCategory=category;
-  document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));
+  currentCategory = category;
+  document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
   el.classList.add("active");
   renderItems();
 }
 
-function addToCart(name, price){
-  cart.push({name, price});
+function addToCart(foodId){
+  const food = foods.find(item => item.id === foodId);
+  const exists = cart.find(item => item.id === foodId);
+  if(exists){
+    exists.qty += 1;
+  } else {
+    cart.push({id:food.id,name:food.name,price:food.price,qty:1});
+  }
   updateCart();
+  renderItems();
+}
+
+function changeQty(id, delta){
+  const item = cart.find(entry => entry.id === id);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty <= 0){
+    cart = cart.filter(entry => entry.id !== id);
+  }
+  updateCart();
+  renderItems();
 }
 
 function updateCart(){
   const cartItems = document.getElementById("cartItems");
   const cartCount = document.getElementById("cartCount");
   const cartTotal = document.getElementById("cartTotal");
+  cartItems.innerHTML = "";
+  let total = 0;
+  let count = 0;
 
-  cartItems.innerHTML="";
-  let total=0;
-
-  cart.forEach((item,index)=>{
-    total+=item.price;
-    cartItems.innerHTML+=`
+  cart.forEach(item => {
+    const lineTotal = item.qty * item.price;
+    total += lineTotal;
+    count += item.qty;
+    cartItems.innerHTML += `
       <div class="cart-item">
-        <span>${item.name}</span>
-        <span>$${item.price} 
-        <button onclick="removeItem(${index})">❌</button>
-        </span>
+        <div>
+          <h4>${item.name}</h4>
+          <div class="note">$${item.price} each</div>
+        </div>
+        <div style="text-align:right">
+          <div><strong>$${lineTotal}</strong></div>
+          <div class="qty-row">
+            <button onclick="changeQty(${item.id},-1)">-</button>
+            <span>${item.qty}</span>
+            <button onclick="changeQty(${item.id},1)">+</button>
+          </div>
+        </div>
       </div>
     `;
   });
 
-  cartCount.innerText=cart.length;
-  cartTotal.innerText="Total: $"+total;
+  if(!cart.length){
+    cartItems.innerHTML = '<p class="note">Your cart is empty. Add dishes to start checkout.</p>';
+  }
+
+  cartCount.innerText = count;
+  cartTotal.innerText = `Total: $${total}`;
 }
 
-function removeItem(index){
-  cart.splice(index,1);
-  updateCart();
+function updateEta(){
+  const visibleFoods = getFilteredFoods();
+  const avgEta = visibleFoods.length ? Math.round(visibleFoods.reduce((sum, food) => sum + food.eta, 0) / visibleFoods.length) : 0;
+  document.getElementById("etaStatus").innerText = avgEta ? `Estimated arrival: ${avgEta} mins` : "No delivery for current filter";
+}
+
+function checkoutViaWhatsApp(){
+  if(!cart.length){
+    alert("Your cart is still empty.");
+    return;
+  }
+
+  const checkoutBtn = document.getElementById("checkoutBtn");
+  const checkoutNote = document.getElementById("checkoutNote");
+  const address = document.getElementById("addressInput").value.trim() || "No address provided";
+  const total = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
+
+  const orderText = [
+    "Hi FreshBite!",
+    "I want to order:",
+    ...cart.map(item => `- ${item.name} x${item.qty} ($${item.qty * item.price})`),
+    "",
+    `Total: $${total}`,
+    `Address: ${address}`,
+    "Ordered from FreshBite web app."
+  ].join("\n");
+
+  const whatsappNumber = "6281234567890";
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(orderText)}`;
+
+  checkoutBtn.disabled = true;
+  checkoutBtn.innerText = "Redirecting to WhatsApp...";
+  checkoutNote.innerText = "Opening WhatsApp automatically so you can send your order now.";
+
+  setTimeout(() => {
+    window.location.href = whatsappUrl;
+  }, 350);
 }
 
 function toggleCart(){
@@ -314,7 +292,7 @@ function toggleCart(){
 }
 
 renderItems();
+updateCart();
 </script>
-
 </body>
 </html>
