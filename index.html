@@ -95,11 +95,17 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
       <div class="mini-panel">
         <strong>Delivery details</strong>
         <div style="height:.55rem"></div>
+
         <label for="customerNameInput" class="input-label">WhatsApp name</label>
         <input id="customerNameInput" placeholder="Enter your WhatsApp name">
         <div style="height:.45rem"></div>
         <label for="addressInput" class="input-label">Detailed address</label>
         <input id="addressInput" placeholder="Enter detailed address">
+=======
+        <input id="customerNameInput" placeholder="Enter your WhatsApp name" value="Budi Santoso">
+        <div style="height:.45rem"></div>
+        <input id="addressInput" placeholder="Enter detailed address" value="Jl. Kemang Raya No. 12, Jakarta Selatan">
+
         <div style="height:.55rem"></div>
         <span class="status" id="etaStatus">Estimated arrival: 25 mins</span>
       </div>
@@ -133,7 +139,11 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
   <div id="cartItems"></div>
   <div class="total" id="cartTotal">Total: $0</div>
   <button class="checkout-btn" id="checkoutBtn" onclick="checkoutViaWhatsApp()">Place order (auto WhatsApp)</button>
+
   <p class="note" id="checkoutNote">Tip: you can change your WhatsApp name and detailed address in Delivery details before checkout.</p>
+=======
+  <p class="note" id="checkoutNote">Tip: fill in your WhatsApp name and detailed address before checkout so your order message is complete.</p>
+
 </div>
 <script>
 const foods = [
