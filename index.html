@@ -303,6 +303,12 @@ function checkoutViaWhatsApp(){
   setTimeout(() => {
     window.location.href = whatsappUrl;
   }, 350);
+
+  setTimeout(() => {
+    checkoutBtn.disabled = false;
+    checkoutBtn.innerText = "Place order (auto WhatsApp)";
+    checkoutNote.innerText = "Tip: you can change your WhatsApp name and detailed address in Delivery details before checkout.";
+  }, 4000);
 }
 
 function toggleCart(){
