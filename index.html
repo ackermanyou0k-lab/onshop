@@ -7,18 +7,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --primary:#06c167;
-  --primary-dark:#049e53;
-  --text:#111;
-  --muted:#6b6b6b;
-  --border:#ececec;
-  --bg:#f7f7f7;
-  --warning:#ff8c42;
+  --primary:#c78634;
+  --primary-dark:#a8681e;
+  --text:#3f2d1d;
+  --muted:#7c6753;
+  --border:#e8d9c7;
+  --bg:#fff8ef;
+  --surface:#fffdf8;
+  --warning:#d4882a;
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:"Inter",sans-serif;background:var(--bg);color:var(--text)}
 .container{width:min(1200px,92%);margin:auto}
-header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+header{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.1)}
 .nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;gap:1rem;flex-wrap:wrap}
 .brand{font-weight:800;font-size:1.2rem;display:flex;align-items:center;gap:.4rem}
 .pill{padding:.4rem .75rem;border-radius:999px;border:1px solid var(--border);font-size:.8rem;color:var(--muted)}
@@ -26,17 +27,17 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
 .cart-count{position:absolute;top:-8px;right:-8px;background:var(--primary);color:#fff;font-size:.75rem;padding:2px 6px;border-radius:999px}
 .hero{padding:1.3rem 0 .7rem}
 .hero-grid{display:grid;grid-template-columns:2fr 1fr;gap:1rem}
-.search-bar,.mini-panel,.tools{background:#fff;border-radius:14px;padding:.8rem 1rem;border:1px solid var(--border)}
+.search-bar,.mini-panel,.tools{background:var(--surface);border-radius:14px;padding:.8rem 1rem;border:1px solid var(--border)}
 .search-bar{display:flex;align-items:center;gap:.5rem}
 .search-bar input,.tools select,.mini-panel input{border:none;outline:none;flex:1;font-size:1rem;background:transparent}
 .tools{display:flex;gap:.75rem;align-items:center;justify-content:space-between}
 .tools label{font-size:.85rem;color:var(--muted);display:block}
 .tools select{border:1px solid var(--border);padding:.35rem .45rem;border-radius:8px;background:#fff}
 .categories{display:flex;gap:.5rem;overflow-x:auto;padding:1rem 0}
-.chip{background:#fff;border:1px solid var(--border);padding:.5rem .9rem;border-radius:999px;cursor:pointer;white-space:nowrap;font-size:.9rem}
+.chip{background:var(--surface);border:1px solid var(--border);padding:.5rem .9rem;border-radius:999px;cursor:pointer;white-space:nowrap;font-size:.9rem;transition:all .22s ease}
 .chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin:1rem 0 1.5rem}
-.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,.05);border:1px solid #f0f0f0;display:flex;flex-direction:column}
+.card{background:var(--surface);border-radius:16px;overflow:hidden;box-shadow:0 8px 20px rgba(112,75,36,.08);border:1px solid #f1e4d3;display:flex;flex-direction:column;transform:translateY(12px);opacity:0;animation:cardEnter .45s ease forwards}
 .card img{width:100%;height:160px;object-fit:cover}
 .card-content{padding:1rem;display:flex;flex-direction:column;gap:.45rem;flex:1}
 .card h3{margin:0;font-size:1.05rem}
@@ -46,15 +47,15 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
 .price{font-weight:800;font-size:1.1rem}
 .quick{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;color:var(--muted)}
 .add-btn,.ghost-btn{width:100%;padding:.62rem;border:none;border-radius:8px;cursor:pointer;font-weight:700}
-.add-btn{background:var(--primary);color:#fff}
-.add-btn:hover{background:var(--primary-dark)}
+.add-btn{background:var(--primary);color:#fff;transition:transform .2s ease, box-shadow .2s ease}
+.add-btn:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 8px 18px rgba(167,104,30,.25)}
 .ghost-btn{background:#f1fff8;color:var(--primary-dark)}
-.social{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1rem;margin-bottom:1.5rem}
+.social{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1rem;margin-bottom:1.5rem}
 .social h3{margin:0 0 .6rem}
 .social-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.6rem}
 .social a{display:block;text-decoration:none;color:#111;border:1px solid var(--border);padding:.6rem .7rem;border-radius:10px;font-weight:600;background:#fafafa}
 .social small{color:var(--muted)}
-.cart-panel{position:fixed;top:0;right:-420px;width:380px;max-width:95vw;height:100%;background:#fff;box-shadow:-5px 0 20px rgba(0,0,0,.1);padding:1rem;transition:.3s;overflow-y:auto;z-index:100}
+.cart-panel{position:fixed;top:0;right:-420px;width:380px;max-width:95vw;height:100%;background:var(--surface);box-shadow:-5px 0 20px rgba(92,61,29,.16);padding:1rem;transition:.3s;overflow-y:auto;z-index:100}
 .cart-panel.open{right:0}
 .cart-item{display:grid;grid-template-columns:1fr auto;gap:.3rem;padding:.7rem 0;border-bottom:1px dashed var(--border)}
 .cart-item h4{margin:0;font-size:.95rem}
@@ -65,7 +66,13 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
 .checkout-btn{margin-top:.8rem;background:#111;color:#fff;border:none;border-radius:8px;padding:.7rem;width:100%;font-weight:700;cursor:pointer}
 .checkout-btn:disabled{opacity:.75;cursor:not-allowed}
 .note{font-size:.82rem;color:var(--muted)}
-.status{padding:.4rem .7rem;background:#fff4ec;color:#b85b14;border-radius:10px;border:1px solid #ffd9bd;font-size:.82rem;display:inline-block}
+.status{padding:.4rem .7rem;background:#fff4e1;color:#9a6118;border-radius:10px;border:1px solid #f5d5aa;font-size:.82rem;display:inline-block}
+.menu-toggle{display:flex;gap:.5rem;padding:.15rem;background:#f8ead7;border:1px solid var(--border);border-radius:999px}
+.menu-tab{border:none;background:transparent;padding:.45rem .85rem;border-radius:999px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s ease}
+.menu-tab.active{background:var(--primary);color:#fff;box-shadow:0 6px 14px rgba(167,104,30,.24)}
+.chip:hover{transform:translateY(-1px);border-color:#d9bea2}
+.chip.active{transform:translateY(-1px)}
+@keyframes cardEnter{to{transform:translateY(0);opacity:1}}
 @media (max-width:900px){
   .hero-grid{grid-template-columns:1fr}
 }
@@ -75,7 +82,13 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
 <header>
   <div class="container nav">
     <div class="brand">🍽️ DIMDIMSUM <span class="pill">Live delivery mode</span></div>
-    <div class="cart-btn" onclick="toggleCart()">🛒 Order <span class="cart-count" id="cartCount">0</span></div>
+    <div style="display:flex;align-items:center;gap:.7rem;flex-wrap:wrap">
+      <div class="menu-toggle">
+        <button class="menu-tab active" id="menuTab1" onclick="switchMenu(1)">Menu 1</button>
+        <button class="menu-tab" id="menuTab2" onclick="switchMenu(2)">Menu 2</button>
+      </div>
+      <div class="cart-btn" onclick="toggleCart()">🛒 Order <span class="cart-count" id="cartCount">0</span></div>
+    </div>
   </div>
 </header>
 <main class="container">
@@ -133,13 +146,23 @@ header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top
   <p class="note" id="checkoutNote">Tip: fill in your WhatsApp name and detailed address before checkout so your order message is complete.</p>
 </div>
 <script>
-const foods = [
+const menuData = {
+  1:[
   {id:1,name:"Burger House",category:"Burger",price:20,rating:4.7,eta:20,orders:320,img:"https://images.unsplash.com/photo-1600891964599-f61ba0e24092"},
   {id:2,name:"Green Bowl",category:"Healthy",price:10,rating:4.9,eta:22,orders:280,img:"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"},
   {id:3,name:"Sushi Master",category:"Sushi",price:5,rating:4.8,eta:27,orders:180,img:"https://images.unsplash.com/photo-1562967916-eb82221dfb92"},
   {id:4,name:"Chicken Burger",category:"Burger",price:15,rating:4.6,eta:18,orders:410,img:"https://images.unsplash.com/photo-1550547660-d9450f859349"},
   {id:5,name:"Morning Latte",category:"Coffee",price:8,rating:4.8,eta:15,orders:510,img:"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"}
-];
+],
+  2:[
+    {id:101,name:"Creamy Pasta",category:"Healthy",price:13,rating:4.7,eta:24,orders:240,img:"https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9"},
+    {id:102,name:"Double Cheese Burger",category:"Burger",price:18,rating:4.8,eta:21,orders:330,img:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd"},
+    {id:103,name:"Salmon Sushi Set",category:"Sushi",price:16,rating:4.9,eta:26,orders:280,img:"https://images.unsplash.com/photo-1617196035154-1e5f9f7f6fbe"},
+    {id:104,name:"Iced Caramel Coffee",category:"Coffee",price:9,rating:4.7,eta:16,orders:390,img:"https://images.unsplash.com/photo-1461023058943-07fcbe16d735"},
+    {id:105,name:"Avocado Crunch Bowl",category:"Healthy",price:12,rating:4.8,eta:19,orders:310,img:"https://images.unsplash.com/photo-1512621776951-a57141f2eefd"}
+  ]
+};
+let activeMenu = 1;
 let cart = [];
 let currentCategory = "All";
 const USD_TO_IDR = 1000;
@@ -152,6 +175,7 @@ function formatIDRFromUSD(usdAmount){
 function getFilteredFoods(){
   const search = document.getElementById("searchInput").value.toLowerCase();
   const sort = document.getElementById("sortSelect").value;
+  const foods = menuData[activeMenu];
   const filtered = foods
     .filter(f => currentCategory === "All" || f.category === currentCategory)
     .filter(f => f.name.toLowerCase().includes(search));
@@ -195,8 +219,18 @@ function filterCategory(category, el){
   renderItems();
 }
 
+function switchMenu(menuNumber){
+  activeMenu = menuNumber;
+  document.getElementById("menuTab1").classList.toggle("active", menuNumber === 1);
+  document.getElementById("menuTab2").classList.toggle("active", menuNumber === 2);
+  currentCategory = "All";
+  document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+  document.querySelector(".chip").classList.add("active");
+  renderItems();
+}
+
 function addToCart(foodId){
-  const food = foods.find(item => item.id === foodId);
+  const food = menuData[activeMenu].find(item => item.id === foodId);
   const exists = cart.find(item => item.id === foodId);
   if(exists){
     exists.qty += 1;
