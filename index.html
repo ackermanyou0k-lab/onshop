@@ -14,7 +14,6 @@
   --border:#e8d9c7;
   --bg:#fff8ef;
   --surface:#fffdf8;
-  --warning:#d4882a;
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:"Inter",sans-serif;background:var(--bg);color:var(--text)}
@@ -27,15 +26,8 @@ header{background:var(--surface);border-bottom:1px solid var(--border);position:
 .cart-count{position:absolute;top:-8px;right:-8px;background:var(--primary);color:#fff;font-size:.75rem;padding:2px 6px;border-radius:999px}
 .hero{padding:1.3rem 0 .7rem}
 .hero-grid{display:grid;grid-template-columns:2fr 1fr;gap:1rem}
-.search-bar,.mini-panel,.tools{background:var(--surface);border-radius:14px;padding:.8rem 1rem;border:1px solid var(--border)}
-.search-bar{display:flex;align-items:center;gap:.5rem}
-.search-bar input,.tools select,.mini-panel input{border:none;outline:none;flex:1;font-size:1rem;background:transparent}
-.tools{display:flex;gap:.75rem;align-items:center;justify-content:space-between}
-.tools label{font-size:.85rem;color:var(--muted);display:block}
-.tools select{border:1px solid var(--border);padding:.35rem .45rem;border-radius:8px;background:#fff}
-.categories{display:flex;gap:.5rem;overflow-x:auto;padding:1rem 0}
-.chip{background:var(--surface);border:1px solid var(--border);padding:.5rem .9rem;border-radius:999px;cursor:pointer;white-space:nowrap;font-size:.9rem;transition:all .22s ease}
-.chip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.mini-panel{background:var(--surface);border-radius:14px;padding:.8rem 1rem;border:1px solid var(--border)}
+.mini-panel input{border:none;outline:none;width:100%;font-size:1rem;background:transparent}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin:1rem 0 1.5rem}
 .card{background:var(--surface);border-radius:16px;overflow:hidden;box-shadow:0 8px 20px rgba(112,75,36,.08);border:1px solid #f1e4d3;display:flex;flex-direction:column;transform:translateY(12px);opacity:0;animation:cardEnter .45s ease forwards}
 .card img{width:100%;height:160px;object-fit:cover}
@@ -46,10 +38,8 @@ header{background:var(--surface);border-bottom:1px solid var(--border);position:
 .rating{font-weight:700;font-size:.9rem}
 .price{font-weight:800;font-size:1.1rem}
 .quick{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;color:var(--muted)}
-.add-btn,.ghost-btn{width:100%;padding:.62rem;border:none;border-radius:8px;cursor:pointer;font-weight:700}
-.add-btn{background:var(--primary);color:#fff;transition:transform .2s ease, box-shadow .2s ease}
+.add-btn{width:100%;padding:.62rem;border:none;border-radius:8px;cursor:pointer;font-weight:700;background:var(--primary);color:#fff;transition:transform .2s ease, box-shadow .2s ease}
 .add-btn:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 8px 18px rgba(167,104,30,.25)}
-.ghost-btn{background:#f1fff8;color:var(--primary-dark)}
 .social{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1rem;margin-bottom:1.5rem}
 .social h3{margin:0 0 .6rem}
 .social-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.6rem}
@@ -67,15 +57,21 @@ header{background:var(--surface);border-bottom:1px solid var(--border);position:
 .checkout-btn:disabled{opacity:.75;cursor:not-allowed}
 .note{font-size:.82rem;color:var(--muted)}
 .status{padding:.4rem .7rem;background:#fff4e1;color:#9a6118;border-radius:10px;border:1px solid #f5d5aa;font-size:.82rem;display:inline-block}
-.menu-toggle{display:flex;gap:.5rem;padding:.15rem;background:#f8ead7;border:1px solid var(--border);border-radius:999px}
-.menu-tab{border:none;background:transparent;padding:.45rem .85rem;border-radius:999px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s ease}
-.menu-tab.active{background:var(--primary);color:#fff;box-shadow:0 6px 14px rgba(167,104,30,.24)}
-.chip:hover{transform:translateY(-1px);border-color:#d9bea2}
-.chip.active{transform:translateY(-1px)}
+
+.modal-backdrop{position:fixed;inset:0;background:rgba(19,11,3,.5);display:none;align-items:center;justify-content:center;z-index:120}
+.modal-backdrop.open{display:flex}
+.modal{width:min(520px,92vw);background:var(--surface);border-radius:16px;border:1px solid var(--border);padding:1rem}
+.modal h3{margin:.1rem 0 .4rem}
+.modal p{margin:.2rem 0 .8rem;color:var(--muted)}
+.modal select{width:100%;padding:.55rem;border:1px solid var(--border);border-radius:8px;background:#fff;margin-bottom:.8rem}
+.modal-row{display:flex;align-items:center;justify-content:space-between;gap:.8rem;margin-bottom:.8rem}
+.modal-qty{display:flex;align-items:center;gap:.4rem}
+.modal-qty button{border:1px solid var(--border);background:#fff;border-radius:8px;padding:.2rem .6rem;cursor:pointer;font-size:1rem}
+.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.ghost-btn{width:100%;padding:.62rem;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-weight:700;background:#fff}
+
 @keyframes cardEnter{to{transform:translateY(0);opacity:1}}
-@media (max-width:900px){
-  .hero-grid{grid-template-columns:1fr}
-}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -83,10 +79,6 @@ header{background:var(--surface);border-bottom:1px solid var(--border);position:
   <div class="container nav">
     <div class="brand">🍽️ DIMDIMSUM <span class="pill">Live delivery mode</span></div>
     <div style="display:flex;align-items:center;gap:.7rem;flex-wrap:wrap">
-      <div class="menu-toggle">
-        <button class="menu-tab active" id="menuTab1" onclick="switchMenu(1)">Menu 1</button>
-        <button class="menu-tab" id="menuTab2" onclick="switchMenu(2)">Menu 2</button>
-      </div>
       <div class="cart-btn" onclick="toggleCart()">🛒 Order <span class="cart-count" id="cartCount">0</span></div>
     </div>
   </div>
@@ -95,14 +87,7 @@ header{background:var(--surface);border-bottom:1px solid var(--border);position:
   <section class="hero">
     <div class="hero-grid">
       <div>
-        <div class="search-bar">🔍 <input type="text" id="searchInput" placeholder="Search menu or restaurant" oninput="renderItems()"></div>
-        <div class="categories">
-          <div class="chip active" onclick="filterCategory('All', this)">All</div>
-          <div class="chip" onclick="filterCategory('Burger', this)">Burger</div>
-          <div class="chip" onclick="filterCategory('Healthy', this)">Healthy</div>
-          <div class="chip" onclick="filterCategory('Sushi', this)">Sushi</div>
-          <div class="chip" onclick="filterCategory('Coffee', this)">Coffee</div>
-        </div>
+        <div class="status">Today only: Burger House & Green Bowl</div>
       </div>
       <div class="mini-panel">
         <strong>Delivery details</strong>
@@ -114,20 +99,10 @@ header{background:var(--surface);border-bottom:1px solid var(--border);position:
         <span class="status" id="etaStatus">Estimated arrival: 30 mins</span>
       </div>
     </div>
-    <div class="tools" style="margin-top:.7rem">
-      <div>
-        <label for="sortSelect">Sort</label>
-        <select id="sortSelect" onchange="renderItems()">
-          <option value="popular">Most popular</option>
-          <option value="priceLow">Price: low to high</option>
-          <option value="priceHigh">Price: high to low</option>
-          <option value="ratingHigh">Top rated</option>
-        </select>
-      </div>
-      <div class="note">Interactive ordering flow inspired by Uber Eats / GoFood.</div>
-    </div>
   </section>
+
   <section class="grid" id="foodGrid"></section>
+
   <section class="social">
     <h3>Connect your shop to social channels</h3>
     <div class="social-grid">
@@ -137,6 +112,28 @@ header{background:var(--surface);border-bottom:1px solid var(--border);position:
     </div>
   </section>
 </main>
+
+<div class="modal-backdrop" id="foodModal" onclick="closeFoodModal()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3 id="modalFoodName"></h3>
+    <p id="modalFoodDesc"></p>
+    <label for="variantSelect"><strong>Variant</strong></label>
+    <select id="variantSelect" onchange="updateModalPrice()"></select>
+    <div class="modal-row">
+      <div class="modal-qty">
+        <button onclick="changeModalQty(-1)">-</button>
+        <strong id="modalQty">1</strong>
+        <button onclick="changeModalQty(1)">+</button>
+      </div>
+      <strong id="modalPrice"></strong>
+    </div>
+    <div class="modal-actions">
+      <button class="ghost-btn" onclick="closeFoodModal()">Cancel</button>
+      <button class="add-btn" onclick="confirmAddFromModal()">Add to cart</button>
+    </div>
+  </div>
+</div>
+
 <div class="cart-panel" id="cartPanel">
   <div class="close-cart" onclick="toggleCart()">← Close</div>
   <h3>Your order</h3>
@@ -145,26 +142,44 @@ header{background:var(--surface);border-bottom:1px solid var(--border);position:
   <button class="checkout-btn" id="checkoutBtn" onclick="checkoutViaWhatsApp()">Place order (auto WhatsApp)</button>
   <p class="note" id="checkoutNote">Tip: fill in your WhatsApp name and detailed address before checkout so your order message is complete.</p>
 </div>
+
 <script>
-const menuData = {
-  1:[
-  {id:1,name:"Burger House",category:"Burger",price:20,rating:4.7,eta:20,orders:320,img:"https://images.unsplash.com/photo-1600891964599-f61ba0e24092"},
-  {id:2,name:"Green Bowl",category:"Healthy",price:10,rating:4.9,eta:22,orders:280,img:"https://images.unsplash.com/photo-1546069901-ba9599a7e63c"},
-  {id:3,name:"Sushi Master",category:"Sushi",price:5,rating:4.8,eta:27,orders:180,img:"https://images.unsplash.com/photo-1562967916-eb82221dfb92"},
-  {id:4,name:"Chicken Burger",category:"Burger",price:15,rating:4.6,eta:18,orders:410,img:"https://images.unsplash.com/photo-1550547660-d9450f859349"},
-  {id:5,name:"Morning Latte",category:"Coffee",price:8,rating:4.8,eta:15,orders:510,img:"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"}
-],
-  2:[
-    {id:101,name:"Creamy Pasta",category:"Healthy",price:13,rating:4.7,eta:24,orders:240,img:"https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9"},
-    {id:102,name:"Double Cheese Burger",category:"Burger",price:18,rating:4.8,eta:21,orders:330,img:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd"},
-    {id:103,name:"Salmon Sushi Set",category:"Sushi",price:16,rating:4.9,eta:26,orders:280,img:"https://images.unsplash.com/photo-1617196035154-1e5f9f7f6fbe"},
-    {id:104,name:"Iced Caramel Coffee",category:"Coffee",price:9,rating:4.7,eta:16,orders:390,img:"https://images.unsplash.com/photo-1461023058943-07fcbe16d735"},
-    {id:105,name:"Avocado Crunch Bowl",category:"Healthy",price:12,rating:4.8,eta:19,orders:310,img:"https://images.unsplash.com/photo-1512621776951-a57141f2eefd"}
-  ]
-};
-let activeMenu = 1;
+const menuData = [
+  {
+    id:1,
+    name:"Burger House",
+    category:"Burger",
+    description:"Juicy grilled beef patty with lettuce, tomato, and house sauce on a toasted brioche bun.",
+    price:20,
+    rating:4.7,
+    eta:20,
+    orders:320,
+    img:"https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
+    variants:[
+      {name:"Regular", priceDelta:0},
+      {name:"Double Patty", priceDelta:6}
+    ]
+  },
+  {
+    id:2,
+    name:"Green Bowl",
+    category:"Healthy",
+    description:"Fresh greens, avocado, quinoa, and crunchy toppings with a light citrus dressing.",
+    price:10,
+    rating:4.9,
+    eta:22,
+    orders:280,
+    img:"https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
+    variants:[
+      {name:"Classic", priceDelta:0},
+      {name:"Extra Avocado", priceDelta:3}
+    ]
+  }
+];
+
 let cart = [];
-let currentCategory = "All";
+let selectedFood = null;
+let modalQuantity = 1;
 const USD_TO_IDR = 1000;
 
 function formatIDRFromUSD(usdAmount){
@@ -172,28 +187,14 @@ function formatIDRFromUSD(usdAmount){
   return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(idrAmount);
 }
 
-function getFilteredFoods(){
-  const search = document.getElementById("searchInput").value.toLowerCase();
-  const sort = document.getElementById("sortSelect").value;
-  const foods = menuData[activeMenu];
-  const filtered = foods
-    .filter(f => currentCategory === "All" || f.category === currentCategory)
-    .filter(f => f.name.toLowerCase().includes(search));
-
-  const sorters = {
-    popular:(a,b)=>b.orders-a.orders,
-    priceLow:(a,b)=>a.price-b.price,
-    priceHigh:(a,b)=>b.price-a.price,
-    ratingHigh:(a,b)=>b.rating-a.rating,
-  };
-  return filtered.sort(sorters[sort]);
+function getFoods(){
+  return [...menuData];
 }
 
 function renderItems(){
   const grid = document.getElementById("foodGrid");
   grid.innerHTML = "";
-  getFilteredFoods().forEach(food => {
-    const inCart = cart.find(item => item.id === food.id);
+  getFoods().forEach(food => {
     grid.innerHTML += `
       <div class="card">
         <img src="${food.img}" alt="${food.name}">
@@ -203,8 +204,9 @@ function renderItems(){
             <div class="meta">${food.category} • ${food.eta} min</div>
             <div class="rating">⭐ ${food.rating}</div>
           </div>
+          <div class="meta">${food.description}</div>
           <div class="quick">${food.orders}+ orders this week <span class="price">${formatIDRFromUSD(food.price)}</span></div>
-          <button class="add-btn" onclick="addToCart(${food.id})">${inCart ? 'Add more' : 'Add to cart'}</button>
+          <button class="add-btn" onclick="openFoodModal(${food.id})">Choose variant & quantity</button>
         </div>
       </div>
     `;
@@ -212,44 +214,72 @@ function renderItems(){
   updateEta();
 }
 
-function filterCategory(category, el){
-  currentCategory = category;
-  document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
-  el.classList.add("active");
-  renderItems();
+function openFoodModal(foodId){
+  selectedFood = menuData.find(item => item.id === foodId);
+  if(!selectedFood) return;
+  modalQuantity = 1;
+  document.getElementById("modalFoodName").innerText = selectedFood.name;
+  document.getElementById("modalFoodDesc").innerText = selectedFood.description;
+
+  const variantSelect = document.getElementById("variantSelect");
+  variantSelect.innerHTML = selectedFood.variants
+    .map(variant => `<option value="${variant.name}">${variant.name} (${formatIDRFromUSD(selectedFood.price + variant.priceDelta)})</option>`)
+    .join("");
+
+  document.getElementById("modalQty").innerText = modalQuantity;
+  updateModalPrice();
+  document.getElementById("foodModal").classList.add("open");
 }
 
-function switchMenu(menuNumber){
-  activeMenu = menuNumber;
-  document.getElementById("menuTab1").classList.toggle("active", menuNumber === 1);
-  document.getElementById("menuTab2").classList.toggle("active", menuNumber === 2);
-  currentCategory = "All";
-  document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
-  document.querySelector(".chip").classList.add("active");
-  renderItems();
+function closeFoodModal(){
+  document.getElementById("foodModal").classList.remove("open");
 }
 
-function addToCart(foodId){
-  const food = menuData[activeMenu].find(item => item.id === foodId);
-  const exists = cart.find(item => item.id === foodId);
-  if(exists){
-    exists.qty += 1;
+function changeModalQty(delta){
+  modalQuantity = Math.max(1, modalQuantity + delta);
+  document.getElementById("modalQty").innerText = modalQuantity;
+  updateModalPrice();
+}
+
+function updateModalPrice(){
+  if(!selectedFood) return;
+  const selectedVariantName = document.getElementById("variantSelect").value;
+  const selectedVariant = selectedFood.variants.find(v => v.name === selectedVariantName) || selectedFood.variants[0];
+  const unitPrice = selectedFood.price + selectedVariant.priceDelta;
+  document.getElementById("modalPrice").innerText = `${formatIDRFromUSD(unitPrice)} each`;
+}
+
+function confirmAddFromModal(){
+  if(!selectedFood) return;
+  const selectedVariantName = document.getElementById("variantSelect").value;
+  const selectedVariant = selectedFood.variants.find(v => v.name === selectedVariantName) || selectedFood.variants[0];
+  const unitPrice = selectedFood.price + selectedVariant.priceDelta;
+  const key = `${selectedFood.id}-${selectedVariant.name}`;
+  const existing = cart.find(item => item.key === key);
+
+  if(existing){
+    existing.qty += modalQuantity;
   } else {
-    cart.push({id:food.id,name:food.name,price:food.price,qty:1});
+    cart.push({
+      key,
+      name:`${selectedFood.name} (${selectedVariant.name})`,
+      price:unitPrice,
+      qty:modalQuantity
+    });
   }
+
+  closeFoodModal();
   updateCart();
-  renderItems();
 }
 
-function changeQty(id, delta){
-  const item = cart.find(entry => entry.id === id);
+function changeQtyByIndex(index, delta){
+  const item = cart[index];
   if(!item) return;
   item.qty += delta;
   if(item.qty <= 0){
-    cart = cart.filter(entry => entry.id !== id);
+    cart.splice(index, 1);
   }
   updateCart();
-  renderItems();
 }
 
 function updateCart(){
@@ -260,7 +290,7 @@ function updateCart(){
   let total = 0;
   let count = 0;
 
-  cart.forEach(item => {
+  cart.forEach((item, index) => {
     const lineTotal = item.qty * item.price;
     total += lineTotal;
     count += item.qty;
@@ -273,9 +303,9 @@ function updateCart(){
         <div style="text-align:right">
           <div><strong>${formatIDRFromUSD(lineTotal)}</strong></div>
           <div class="qty-row">
-            <button onclick="changeQty(${item.id},-1)">-</button>
+            <button onclick="changeQtyByIndex(${index},-1)">-</button>
             <span>${item.qty}</span>
-            <button onclick="changeQty(${item.id},1)">+</button>
+            <button onclick="changeQtyByIndex(${index},1)">+</button>
           </div>
         </div>
       </div>
@@ -291,9 +321,8 @@ function updateCart(){
 }
 
 function updateEta(){
-  const visibleFoods = getFilteredFoods();
-  const avgEta = visibleFoods.length ? Math.round(visibleFoods.reduce((sum, food) => sum + food.eta, 0) / visibleFoods.length) : 0;
-  document.getElementById("etaStatus").innerText = avgEta ? `Estimated arrival: ${avgEta} mins` : "No delivery for current filter";
+  const avgEta = Math.round(menuData.reduce((sum, food) => sum + food.eta, 0) / menuData.length);
+  document.getElementById("etaStatus").innerText = `Estimated arrival: ${avgEta} mins`;
 }
 
 function checkoutViaWhatsApp(){
@@ -311,8 +340,8 @@ function checkoutViaWhatsApp(){
     alert("Please enter your WhatsApp name and detailed address before checkout.");
     return;
   }
-  const total = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
 
+  const total = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
   const orderText = [
     "Hi FreshBite!",
     "I want to order:",
