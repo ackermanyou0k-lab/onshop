@@ -16,13 +16,13 @@
   --surface:#fffdf8;
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:"Inter",sans-serif;background:var(--bg);color:var(--text)}
-.container{width:min(1200px,92%);margin:auto}
-header{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.1)}
+body{margin:0;font-family:"Inter",sans-serif;background:radial-gradient(circle at top,#fff8ef 0%,#f7efe6 52%,#f3e8dc 100%);color:var(--text)}
+.container{width:min(1120px,92%);margin:auto}
+header{background:rgba(255,253,250,.92);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.1) blur(3px)}
 .nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;gap:1rem;flex-wrap:wrap}
 .brand{font-weight:800;font-size:1.2rem;display:flex;align-items:center;gap:.4rem}
-.pill{padding:.4rem .75rem;border-radius:999px;border:1px solid var(--border);font-size:.8rem;color:var(--muted)}
-.cart-btn{position:relative;cursor:pointer;font-weight:700;background:#111;color:#fff;padding:.55rem .95rem;border-radius:999px}
+.pill{padding:.4rem .75rem;border-radius:999px;border:1px solid var(--border);font-size:.8rem;color:var(--muted);background:#fff}
+.cart-btn{position:relative;cursor:pointer;font-weight:700;background:var(--dark);color:#fff;padding:.55rem .95rem;border-radius:999px}
 .cart-count{position:absolute;top:-8px;right:-8px;background:var(--primary);color:#fff;font-size:.75rem;padding:2px 6px;border-radius:999px}
 .hero{padding:1.3rem 0 .7rem}
 .hero-grid{display:grid;grid-template-columns:2fr 1fr;gap:1rem}
@@ -36,7 +36,7 @@ header{background:var(--surface);border-bottom:1px solid var(--border);position:
 .meta{color:var(--muted);font-size:.9rem}
 .meta-row{display:flex;justify-content:space-between;align-items:center}
 .rating{font-weight:700;font-size:.9rem}
-.price{font-weight:800;font-size:1.1rem}
+.price{font-weight:800;font-size:1.15rem;color:var(--dark)}
 .quick{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;color:var(--muted)}
 .add-btn{width:100%;padding:.62rem;border:none;border-radius:8px;cursor:pointer;font-weight:700;background:var(--primary);color:#fff;transition:transform .2s ease, box-shadow .2s ease}
 .add-btn:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 8px 18px rgba(167,104,30,.25)}
@@ -85,6 +85,9 @@ header{background:var(--surface);border-bottom:1px solid var(--border);position:
 </header>
 <main class="container">
   <section class="hero">
+    <h1>Signature Foods by DIMDIMSUM</h1>
+    <p>A curated menu with our two best-selling signature dishes. Built to help customers choose quickly and order confidently.</p>
+    <div><span class="status">Today only: Burger House & Green Bowl</span></div>
     <div class="hero-grid">
       <div>
         <div class="status">Today only: Burger House & Green Bowl</div>
