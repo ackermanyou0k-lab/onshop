@@ -263,15 +263,15 @@ const menuData = [
     id:1,
     name:"Dimsum Goreng Keju",
     category:"Dimsum",
-    description:"Juicy grilled beef patty with lettuce, tomato, and house sauce on a toasted brioche bun.",
+    description:"Dimsum ayam goreng renyah dengan isian keju lumer, disajikan dengan saus sambal spesial.",
     price:15,
     rating:4.7,
     eta:20,
-    orders:320,
+    orders:5,
     img:"dimsumgorengkeju.jpeg",
     variants:[
-      {name:"3 pieces", priceDelta:-5},
-      {name:"4 pieces", priceDelta:0},
+      {name:"3 pieces", priceDelta:0},
+      {name:"4 pieces", priceDelta:5},
       {name:"6 pieces", priceDelta:8}
     ]
   },
@@ -279,15 +279,15 @@ const menuData = [
     id:2,
     name:"Dimsum Mentai",
     category:"Dimsum",
-    description:"Fresh greens, avocado, quinoa, and crunchy toppings with a light citrus dressing.",
+    description:"Dimsum ayam kukus dengan topping saus mentai creamy yang dipanggang smoky.",
     price:10,
     rating:4.9,
     eta:22,
-    orders:280,
-    img:"https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
+    orders:2,
+    img:"dimsummentai.jpg",
     variants:[
-     {name:"3 pieces", priceDelta:-5},
-      {name:"4 pieces", priceDelta:0},
+     {name:"3 pieces", priceDelta:0},
+      {name:"4 pieces", priceDelta:5},
       {name:"6 pieces", priceDelta:8}
     ]
   },
@@ -323,7 +323,7 @@ function renderItems(){
           </div>
           <div class="meta">${food.description}</div>
           <div class="quick">${food.orders}+ orders this week <span class="price">${formatIDRFromUSD(food.price)}</span></div>
-          <button class="add-btn" onclick="openFoodModal(${food.id})">Choose variant & quantity</button>
+          <button class="add-btn" onclick="openFoodModal(${food.id})">Choose quantity</button>
         </div>
       </div>
     `;
