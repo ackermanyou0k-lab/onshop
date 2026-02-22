@@ -146,6 +146,104 @@ h1{font-size:2rem;margin:.5rem 0 .8rem;font-weight:800;background:linear-gradien
   .qty-row button{padding:.2rem .5rem;font-size:1rem}
   .note{font-size:.72rem}
 }
+/* 🔔 POPUP STYLE (MATCH THEME) */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.4s ease;
+}
+
+.popup-box {
+  background: linear-gradient(135deg, rgba(30,64,175,.4) 0%, rgba(15,23,42,.9) 100%);
+  border: 1.5px solid rgba(255,107,53,.4);
+  box-shadow: 0 20px 50px rgba(255,107,53,.25);
+  color: #fff;
+  width: 90%;
+  max-width: 420px;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  position: relative;
+  animation: slideUp 0.4s ease;
+}
+
+.popup-box h2 {
+  background: linear-gradient(135deg, var(--secondary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 15px;
+}
+
+.popup-info p {
+  margin: 6px 0;
+  color: #bfdbfe;
+}
+
+.popup-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 25px;
+  background: linear-gradient(135deg,var(--secondary),var(--accent));
+  color: #1a1a1a;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 700;
+  transition: all .3s ease;
+  box-shadow: 0 6px 20px rgba(255,107,53,.4);
+}
+
+.popup-btn:hover {
+  transform: scale(1.05);
+}
+
+.popup-note {
+  font-size: 12px;
+  margin-top: 15px;
+  opacity: 0.7;
+  color: #bfdbfe;
+}
+
+/* ✖ Close Button */
+.close-popup {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  background: rgba(255,107,53,.2);
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--accent);
+  transition: all .3s ease;
+}
+
+.close-popup:hover {
+  background: var(--accent);
+  color: #1a1a1a;
+  transform: rotate(90deg);
+}
+
+@keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+
+@keyframes slideUp {
+  from {transform: translateY(20px); opacity:0;}
+  to {transform: translateY(0); opacity:1;}
+}
 </style>
 </head>
 <body>
@@ -172,7 +270,7 @@ h1{font-size:2rem;margin:.5rem 0 .8rem;font-weight:800;background:linear-gradien
         <input id="addressInput" placeholder="Detailed delivery address" value="">
         <div style="margin-top:.8rem;padding:.8rem;background:rgba(255,107,53,.1);border-radius:10px">
           <div style="font-size:.75rem;color:var(--text-light);margin-bottom:.3rem">Estimated arrival</div>
-          <span id="etaStatus" style="font-weight:700;color:var(--primary);font-size:1.1rem">⏱️ 25 mins</span>
+          <span id="etaStatus" style="font-weight:700;color:var(--primary);font-size:1.1rem">⏱️ 30 mins</span>
         </div>
       </div>
     </div>
@@ -205,10 +303,6 @@ h1{font-size:2rem;margin:.5rem 0 .8rem;font-weight:800;background:linear-gradien
     <h3>📱 Connect & Follow</h3>
     <p>Stay updated with our latest dishes and promotions on your favorite platforms.</p>
     <div class="social-grid">
-      <a href="https://www.tiktok.com/@freshbite" target="_blank" rel="noopener noreferrer">
-        <div style="font-size:1.8rem;margin-bottom:.4rem">🎵</div>
-        <strong>TikTok</strong><br><small>Trending videos & live selling</small>
-      </a>
       <a href="https://www.instagram.com/freshbite" target="_blank" rel="noopener noreferrer">
         <div style="font-size:1.8rem;margin-bottom:.4rem">📸</div>
         <strong>Instagram</strong><br><small>Reels & behind-the-scenes</small>
@@ -257,6 +351,32 @@ h1{font-size:2rem;margin:.5rem 0 .8rem;font-weight:800;background:linear-gradien
   <p class="note">💡 <strong>Pro tip:</strong> Fill in your name and address above to send a complete order message automatically.</p>
 </div>
 
+<div id="announcementPopup" class="popup-overlay">
+  <div class="popup-box">
+    <div class="close-popup" onclick="closePopup()">✕</div>
+    
+    <h2>📢 PRE-ORDER OPEN NOW!</h2>
+    
+    <p>
+      Kami membuka <strong>Pre-Order Dimsum</strong> sekarang!
+      Semua pesanan dibuat fresh di hari pengiriman.
+    </p>
+
+    <div class="popup-info">
+      <p>🗓 Order hari ini, kirim sesuai jadwal</p>
+      <p>💰 Wajib pembayaran untuk konfirmasi</p>
+      <p>📲 Kirim bukti transfer ke admin</p>
+    </div>
+
+    <a href="https://wa.me/6289504378484" target="_blank" class="popup-btn">
+      Chat Admin
+    </a>
+
+    <p class="popup-note">
+      *Pesanan diproses setelah pembayaran dikonfirmasi.
+    </p>
+  </div>
+</div>
 <script>
 const menuData = [
   {
@@ -271,8 +391,8 @@ const menuData = [
     img:"dimsumgorengkeju.jpeg",
     variants:[
       {name:"3 pieces", priceDelta:0},
-      {name:"4 pieces", priceDelta:5},
-      {name:"6 pieces", priceDelta:8}
+      {name:"4 pieces", priceDelta:4},
+      {name:"6 pieces", priceDelta:7}
     ]
   },
   {
@@ -280,67 +400,94 @@ const menuData = [
     name:"Dimsum Mentai",
     category:"Dimsum",
     description:"Dimsum ayam kukus dengan topping saus mentai creamy yang dipanggang smoky.",
-    price:10,
+    price:18,
     rating:4.9,
     eta:22,
     orders:2,
     img:"dimsummentai.jpg",
     variants:[
-     {name:"3 pieces", priceDelta:0},
-      {name:"4 pieces", priceDelta:5},
-      {name:"6 pieces", priceDelta:8}
+      {name:"4 pieces", priceDelta:0},
+      {name:"6 pieces", priceDelta:7}
     ]
-  },
-  
+  }
 ];
+function closePopup() {
+  document.getElementById("announcementPopup").style.display = "none";
+}
+
+// Optional: hanya muncul sekali per browser
+window.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("announcementPopup").style.display = "flex";
+});
 
 let cart = [];
 let selectedFood = null;
 let modalQuantity = 1;
-const USD_TO_IDR = 1000;
 
-function formatIDRFromUSD(usdAmount){
-  const idrAmount = Math.round(usdAmount * USD_TO_IDR);
-  return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(idrAmount);
+function formatIDR(priceInThousands){
+  const realPrice = priceInThousands * 1000;
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0
+  }).format(realPrice);
 }
 
-function getFoods(){
-  return [...menuData];
+function getLowestPrice(food){
+  const prices = food.variants.map(v => food.price + v.priceDelta);
+  return Math.min(...prices);
 }
 
 function renderItems(){
   const grid = document.getElementById("foodGrid");
   grid.innerHTML = "";
-  getFoods().forEach(food => {
+
+  menuData.forEach(food => {
     grid.innerHTML += `
       <div class="card">
         <img src="${food.img}" alt="${food.name}">
         <div class="card-content">
-          <div class="featured-label">Signature Dish</div><h3>${food.name}</h3>
+          <div class="featured-label">Signature Dish</div>
+          <h3>${food.name}</h3>
           <div class="meta-row">
             <div class="meta">${food.category} • ${food.eta} min</div>
             <div class="rating">⭐ ${food.rating}</div>
           </div>
           <div class="meta">${food.description}</div>
-          <div class="quick">${food.orders}+ orders this week <span class="price">${formatIDRFromUSD(food.price)}</span></div>
-          <button class="add-btn" onclick="openFoodModal(${food.id})">Choose quantity</button>
+          <div class="quick">
+            ${food.orders}+ orders this week
+            <span class="price">
+              Start from ${formatIDR(getLowestPrice(food))}
+            </span>
+          </div>
+          <button class="add-btn" onclick="openFoodModal(${food.id})">
+            Customize & Order
+          </button>
         </div>
       </div>
     `;
   });
+
   updateEta();
 }
 
 function openFoodModal(foodId){
   selectedFood = menuData.find(item => item.id === foodId);
   if(!selectedFood) return;
+
   modalQuantity = 1;
+
   document.getElementById("modalFoodName").innerText = selectedFood.name;
   document.getElementById("modalFoodDesc").innerText = selectedFood.description;
 
   const variantSelect = document.getElementById("variantSelect");
   variantSelect.innerHTML = selectedFood.variants
-    .map(variant => `<option value="${variant.name}">${variant.name} (${formatIDRFromUSD(selectedFood.price + variant.priceDelta)})</option>`)
+    .map(variant => {
+      const price = selectedFood.price + variant.priceDelta;
+      return `<option value="${variant.name}">
+        ${variant.name} (${formatIDR(price)})
+      </option>`;
+    })
     .join("");
 
   document.getElementById("modalQty").innerText = modalQuantity;
@@ -360,17 +507,22 @@ function changeModalQty(delta){
 
 function updateModalPrice(){
   if(!selectedFood) return;
+
   const selectedVariantName = document.getElementById("variantSelect").value;
-  const selectedVariant = selectedFood.variants.find(v => v.name === selectedVariantName) || selectedFood.variants[0];
+  const selectedVariant = selectedFood.variants.find(v => v.name === selectedVariantName);
   const unitPrice = selectedFood.price + selectedVariant.priceDelta;
-  document.getElementById("modalPrice").innerText = `${formatIDRFromUSD(unitPrice)} each`;
+
+  document.getElementById("modalPrice").innerText =
+    `${formatIDR(unitPrice)} each`;
 }
 
 function confirmAddFromModal(){
   if(!selectedFood) return;
+
   const selectedVariantName = document.getElementById("variantSelect").value;
-  const selectedVariant = selectedFood.variants.find(v => v.name === selectedVariantName) || selectedFood.variants[0];
+  const selectedVariant = selectedFood.variants.find(v => v.name === selectedVariantName);
   const unitPrice = selectedFood.price + selectedVariant.priceDelta;
+
   const key = `${selectedFood.id}-${selectedVariant.name}`;
   const existing = cart.find(item => item.key === key);
 
@@ -387,22 +539,18 @@ function confirmAddFromModal(){
 
   closeFoodModal();
   updateCart();
-  
-  // Animate cart badge
-  const cartCount = document.getElementById("cartCount");
-  cartCount.style.animation = 'none';
-  setTimeout(() => {
-    cartCount.style.animation = 'cartPulse .5s cubic-bezier(.23,1,.32,1)';
-  }, 10);
 }
 
 function changeQtyByIndex(index, delta){
   const item = cart[index];
   if(!item) return;
+
   item.qty += delta;
+
   if(item.qty <= 0){
     cart.splice(index, 1);
   }
+
   updateCart();
 }
 
@@ -410,7 +558,9 @@ function updateCart(){
   const cartItems = document.getElementById("cartItems");
   const cartCount = document.getElementById("cartCount");
   const cartTotal = document.getElementById("cartTotal");
+
   cartItems.innerHTML = "";
+
   let total = 0;
   let count = 0;
 
@@ -418,14 +568,15 @@ function updateCart(){
     const lineTotal = item.qty * item.price;
     total += lineTotal;
     count += item.qty;
+
     cartItems.innerHTML += `
       <div class="cart-item">
         <div>
           <h4>${item.name}</h4>
-          <div class="note">${formatIDRFromUSD(item.price)} each</div>
+          <div class="note">${formatIDR(item.price)} each</div>
         </div>
         <div style="text-align:right">
-          <div><strong>${formatIDRFromUSD(lineTotal)}</strong></div>
+          <div><strong>${formatIDR(lineTotal)}</strong></div>
           <div class="qty-row">
             <button onclick="changeQtyByIndex(${index},-1)">-</button>
             <span>${item.qty}</span>
@@ -437,16 +588,21 @@ function updateCart(){
   });
 
   if(!cart.length){
-    cartItems.innerHTML = '<p class="note">Your cart is empty. Add dishes to start checkout.</p>';
+    cartItems.innerHTML =
+      '<p class="note">Your cart is empty. Add dishes to start checkout.</p>';
   }
 
   cartCount.innerText = count;
-  cartTotal.innerText = `Total: ${formatIDRFromUSD(total)}`;
+  cartTotal.innerText = `Total: ${formatIDR(total)}`;
 }
 
 function updateEta(){
-  const avgEta = Math.round(menuData.reduce((sum, food) => sum + food.eta, 0) / menuData.length);
-  document.getElementById("etaStatus").innerText = `Estimated arrival: ${avgEta} mins`;
+  const avgEta = Math.round(
+    menuData.reduce((sum, food) => sum + food.eta, 0) / menuData.length
+  );
+
+  document.getElementById("etaStatus").innerText =
+    `Estimated arrival: ${avgEta} mins`;
 }
 
 function checkoutViaWhatsApp(){
@@ -455,7 +611,6 @@ function checkoutViaWhatsApp(){
     return;
   }
 
-  const checkoutBtn = document.getElementById("checkoutBtn");
   const customerName = document.getElementById("customerNameInput").value.trim();
   const address = document.getElementById("addressInput").value.trim();
 
@@ -465,26 +620,25 @@ function checkoutViaWhatsApp(){
   }
 
   const total = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
+
   const orderText = [
     "DIMDIMSUM!",
     "I want to order:",
-    ...cart.map(item => `- ${item.name} x${item.qty} (${formatIDRFromUSD(item.qty * item.price)})`),
+    ...cart.map(item =>
+      `- ${item.name} x${item.qty} (${formatIDR(item.qty * item.price)})`
+    ),
     "",
-    `Total: ${formatIDRFromUSD(total)}`,
+    `Total: ${formatIDR(total)}`,
     `Customer Name: ${customerName}`,
     `Detailed Address: ${address}`,
     "Ordered from DIMDIMSUM web app."
   ].join("\n");
 
   const whatsappNumber = "6289504378484";
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(orderText)}`;
+  const whatsappUrl =
+    `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(orderText)}`;
 
-  checkoutBtn.disabled = true;
-  checkoutBtn.innerText = "Redirecting to WhatsApp...";
-
-  setTimeout(() => {
-    window.location.href = whatsappUrl;
-  }, 350);
+  window.location.href = whatsappUrl;
 }
 
 function toggleCart(){
