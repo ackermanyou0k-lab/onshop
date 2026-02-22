@@ -7,99 +7,162 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --primary:#c78634;
-  --primary-dark:#a8681e;
-  --text:#3f2d1d;
-  --muted:#7c6753;
-  --border:#e8d9c7;
-  --bg:#fff8ef;
-  --surface:#fffdf8;
+  --primary:#1e40af;
+  --primary-dark:#1e3a8a;
+  --secondary:#3b82f6;
+  --accent:#ff6b35;
+  --text:#ffffff;
+  --text-light:#bfdbfe;
+  --border:#1e3a8a;
+  --bg:#0f172a;
+  --surface:#1e293b;
+  --success:#10b981;
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:"Inter",sans-serif;background:radial-gradient(circle at top,#fff8ef 0%,#f7efe6 52%,#f3e8dc 100%);color:var(--text)}
-.container{width:min(1120px,92%);margin:auto}
-header{background:rgba(255,253,250,.92);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.1) blur(3px)}
-.nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;gap:1rem;flex-wrap:wrap}
-.brand{font-weight:800;font-size:1.2rem;display:flex;align-items:center;gap:.4rem}
-.pill{padding:.4rem .75rem;border-radius:999px;border:1px solid var(--border);font-size:.8rem;color:var(--muted);background:#fff}
-.cart-btn{position:relative;cursor:pointer;font-weight:700;background:var(--dark);color:#fff;padding:.55rem .95rem;border-radius:999px}
-.cart-count{position:absolute;top:-8px;right:-8px;background:var(--primary);color:#fff;font-size:.75rem;padding:2px 6px;border-radius:999px}
-.hero{padding:1.3rem 0 .7rem}
-.hero-grid{display:grid;grid-template-columns:2fr 1fr;gap:1rem}
-.mini-panel{background:var(--surface);border-radius:14px;padding:.8rem 1rem;border:1px solid var(--border)}
-.mini-panel input{border:none;outline:none;width:100%;font-size:1rem;background:transparent}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin:1rem 0 1.5rem}
-.card{background:var(--surface);border-radius:16px;overflow:hidden;box-shadow:0 8px 20px rgba(112,75,36,.08);border:1px solid #f1e4d3;display:flex;flex-direction:column;transform:translateY(12px);opacity:0;animation:cardEnter .45s ease forwards}
-.card img{width:100%;height:160px;object-fit:cover}
-.card-content{padding:1rem;display:flex;flex-direction:column;gap:.45rem;flex:1}
-.card h3{margin:0;font-size:1.05rem}
-.meta{color:var(--muted);font-size:.9rem}
-.meta-row{display:flex;justify-content:space-between;align-items:center}
-.rating{font-weight:700;font-size:.9rem}
-.price{font-weight:800;font-size:1.15rem;color:var(--dark)}
-.quick{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;color:var(--muted)}
-.add-btn{width:100%;padding:.62rem;border:none;border-radius:8px;cursor:pointer;font-weight:700;background:var(--primary);color:#fff;transition:transform .2s ease, box-shadow .2s ease}
-.add-btn:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 8px 18px rgba(167,104,30,.25)}
-.social{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1rem;margin-bottom:1.5rem}
-.social h3{margin:0 0 .6rem}
-.social-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.6rem}
-.social a{display:block;text-decoration:none;color:#111;border:1px solid var(--border);padding:.6rem .7rem;border-radius:10px;font-weight:600;background:#fafafa}
-.social small{color:var(--muted)}
-.cart-panel{position:fixed;top:0;right:-420px;width:380px;max-width:95vw;height:100%;background:var(--surface);box-shadow:-5px 0 20px rgba(92,61,29,.16);padding:1rem;transition:.3s;overflow-y:auto;z-index:100}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Inter",sans-serif;background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#1e40af 100%);color:var(--text);line-height:1.6}
+.container{width:min(1200px,92%);margin:auto}
+header{background:linear-gradient(135deg,rgba(30,64,175,.95) 0%,rgba(15,23,42,.6) 100%);border-bottom:2px solid var(--accent);position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);box-shadow:0 4px 20px rgba(255,107,53,.25)}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 0;gap:1rem;flex-wrap:wrap}
+.brand{font-weight:800;font-size:1.4rem;display:flex;align-items:center;gap:.6rem;background:linear-gradient(135deg,var(--secondary) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.pill{padding:.5rem .85rem;border-radius:999px;border:1.5px solid var(--accent);font-size:.75rem;color:var(--accent);background:linear-gradient(135deg,rgba(212,175,55,.2) 0%,rgba(45,80,22,.1) 100%);font-weight:600}
+.cart-btn{position:relative;cursor:pointer;font-weight:700;background:linear-gradient(135deg,var(--secondary) 0%,var(--accent) 100%);color:#1a1a1a;padding:.65rem 1.2rem;border-radius:12px;border:none;transition:all .3s ease;transform:scale(1);box-shadow:0 4px 12px rgba(212,175,55,.3)}
+.cart-btn:hover{transform:scale(1.05);box-shadow:0 6px 20px rgba(212,175,55,.4)}
+.cart-count{position:absolute;top:-8px;right:-8px;background:#ff3b3b;color:#fff;font-size:.7rem;padding:3px 7px;border-radius:999px;font-weight:700}
+.hero{padding:2.5rem;background:linear-gradient(135deg,rgba(30,64,175,.2) 0%,rgba(59,130,246,.1) 50%,rgba(255,107,53,.1) 100%);border-radius:20px;margin:2rem auto;border:1px solid rgba(255,107,53,.3)}
+h1{font-size:2rem;margin:.5rem 0 .8rem;font-weight:800;background:linear-gradient(135deg,var(--secondary) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero>p{font-size:1.05rem;color:var(--text-light);margin:.5rem 0 1.2rem}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:1000px;margin:0 auto}
+.mini-panel{background:linear-gradient(135deg,rgba(30,64,175,.3) 0%,rgba(15,23,42,.8) 100%);border-radius:16px;padding:1.2rem;border:1.5px solid var(--accent);box-shadow:0 4px 12px rgba(255,107,53,.2)}
+.mini-panel strong{display:block;margin-bottom:.8rem;color:var(--accent);font-size:.95rem}
+.mini-panel input{border:1.5px solid var(--accent);outline:none;width:100%;font-size:1rem;background:rgba(15,23,42,.5);border-radius:10px;padding:.65rem;margin-bottom:.8rem;transition:all .3s ease;font-family:inherit;color:#fff}
+.mini-panel input::placeholder{color:rgba(191,219,254,.6)}
+.mini-panel input:focus{border-color:var(--accent);background:rgba(30,64,175,.6);box-shadow:0 0 0 3px rgba(255,107,53,.2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin:2.5rem auto;max-width:900px;justify-items:center}
+.card{background:linear-gradient(135deg,rgba(30,64,175,.3) 0%,rgba(15,23,42,.6) 100%);border-radius:18px;overflow:hidden;box-shadow:0 8px 24px rgba(255,107,53,.15);border:1px solid rgba(255,107,53,.3);display:flex;flex-direction:column;transition:all .35s cubic-bezier(.23,1,.320,1);transform:translateY(8px);opacity:0;animation:cardEnter .5s ease forwards;cursor:pointer}
+.card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(255,107,53,.3)}
+.card img{width:100%;height:180px;object-fit:cover;display:block}
+.card-content{padding:1.3rem;display:flex;flex-direction:column;gap:.6rem;flex:1}
+.featured-label{display:inline-block;padding:.35rem .7rem;background:linear-gradient(135deg,var(--secondary),var(--accent),#FFD700);color:#1a1a1a;border-radius:8px;font-size:.75rem;font-weight:700;width:fit-content}
+.card h3{margin:0;font-size:1.25rem;font-weight:700;color:#fff}
+.meta{color:#bfdbfe;font-size:.9rem}
+.meta-row{display:flex;justify-content:space-between;align-items:center;gap:.8rem}
+.rating{font-weight:700;font-size:.95rem;background:linear-gradient(135deg,var(--secondary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.price{font-weight:800;font-size:1.3rem;background:linear-gradient(135deg,var(--secondary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.quick{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;color:#bfdbfe;margin-top:.4rem}
+.add-btn{width:100%;padding:.75rem;border:none;border-radius:12px;cursor:pointer;font-weight:700;background:linear-gradient(135deg,var(--secondary) 0%,var(--accent) 50%,#FFD700 100%);color:#1a1a1a;transition:all .3s ease;transform:scale(1);box-shadow:0 4px 12px rgba(212,175,55,.35);margin-top:.6rem;position:relative;overflow:hidden}
+.add-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:rgba(255,255,255,.3);transition:left .5s ease}
+.add-btn:active::before{left:100%}
+.add-btn:active{transform:scale(0.98)}
+.add-btn:hover{transform:scale(1.02);box-shadow:0 6px 20px rgba(255,107,53,.5);background:linear-gradient(135deg,#1e3a8a 0%,#3b82f6 50%,#ff8c42 100%)}
+.social{background:linear-gradient(135deg,rgba(30,64,175,.3) 0%,rgba(15,23,42,.6) 100%);border:1px solid rgba(255,107,53,.3);border-radius:18px;padding:2rem;margin-bottom:2rem;box-shadow:0 4px 12px rgba(255,107,53,.15)}
+.social h3{margin:0 0 1.2rem;font-size:1.4rem;font-weight:700;color:#fff}
+.social p{color:#bfdbfe;margin-bottom:1.2rem}
+.social-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.social a{display:block;text-decoration:none;color:#fff;border:1.5px solid rgba(255,107,53,.5);padding:1rem;border-radius:14px;font-weight:600;background:linear-gradient(135deg,rgba(30,64,175,.4) 0%,rgba(59,130,246,.2) 100%);transition:all .3s ease;text-align:center}
+.social a:hover{border-color:var(--accent);background:linear-gradient(135deg,rgba(255,107,53,.3) 0%,rgba(255,107,53,.15) 100%);transform:translateY(-2px);box-shadow:0 8px 16px rgba(255,107,53,.3)}
+.social a strong{display:block;margin:.6rem 0 .3rem}
+.social small{color:#bfdbfe;display:block;margin-top:.4rem;font-size:.8rem}
+.cart-panel{position:fixed;top:0;right:-420px;width:380px;max-width:95vw;height:100%;background:linear-gradient(135deg,rgba(30,64,175,.9) 0%,rgba(15,23,42,.9) 100%);box-shadow:-8px 0 32px rgba(255,107,53,.2);padding:1.5rem;transition:.35s cubic-bezier(.23,1,.32,1);overflow-y:auto;z-index:100;border-left:2px solid var(--accent)}
 .cart-panel.open{right:0}
-.cart-item{display:grid;grid-template-columns:1fr auto;gap:.3rem;padding:.7rem 0;border-bottom:1px dashed var(--border)}
-.cart-item h4{margin:0;font-size:.95rem}
-.qty-row{display:flex;gap:.3rem;align-items:center}
-.qty-row button{border:1px solid var(--border);background:#fff;padding:.1rem .45rem;border-radius:6px;cursor:pointer}
-.total{font-weight:800;margin-top:1rem}
-.close-cart{cursor:pointer;font-weight:600;margin-bottom:1rem;display:inline-block}
-.checkout-btn{margin-top:.8rem;background:#111;color:#fff;border:none;border-radius:8px;padding:.7rem;width:100%;font-weight:700;cursor:pointer}
-.checkout-btn:disabled{opacity:.75;cursor:not-allowed}
-.note{font-size:.82rem;color:var(--muted)}
-.status{padding:.4rem .7rem;background:#fff4e1;color:#9a6118;border-radius:10px;border:1px solid #f5d5aa;font-size:.82rem;display:inline-block}
-
-.modal-backdrop{position:fixed;inset:0;background:rgba(19,11,3,.5);display:none;align-items:center;justify-content:center;z-index:120}
-.modal-backdrop.open{display:flex}
-.modal{width:min(520px,92vw);background:var(--surface);border-radius:16px;border:1px solid var(--border);padding:1rem}
-.modal h3{margin:.1rem 0 .4rem}
-.modal p{margin:.2rem 0 .8rem;color:var(--muted)}
-.modal select{width:100%;padding:.55rem;border:1px solid var(--border);border-radius:8px;background:#fff;margin-bottom:.8rem}
-.modal-row{display:flex;align-items:center;justify-content:space-between;gap:.8rem;margin-bottom:.8rem}
-.modal-qty{display:flex;align-items:center;gap:.4rem}
-.modal-qty button{border:1px solid var(--border);background:#fff;border-radius:8px;padding:.2rem .6rem;cursor:pointer;font-size:1rem}
-.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
-.ghost-btn{width:100%;padding:.62rem;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-weight:700;background:#fff}
-
-@keyframes cardEnter{to{transform:translateY(0);opacity:1}}
+.cart-panel h3{margin:.5rem 0 1.2rem;font-size:1.4rem;font-weight:700;color:var(--accent)}
+.cart-item{display:grid;grid-template-columns:1fr auto;gap:.5rem;padding:1rem 0;border-bottom:1px solid rgba(255,107,53,.2)}
+.cart-item h4{margin:0 0 .4rem;font-size:1rem;font-weight:600;color:#fff}
+.qty-row{display:flex;gap:.4rem;align-items:center;justify-content:center}
+.qty-row button{border:1.5px solid var(--accent);background:rgba(255,107,53,.1);padding:.25rem .6rem;border-radius:8px;cursor:pointer;transition:all .2s ease;font-weight:700;color:var(--accent);font-size:1.1rem}
+.qty-row button:hover{background:rgba(255,107,53,.25);border-color:var(--accent);color:#fff}
+.qty-row button:active{transform:scale(0.9)}
+.qty-row span{min-width:1.5rem;text-align:center;font-weight:700;color:#fff}
+.total{font-weight:800;margin-top:1.5rem;font-size:1.3rem;background:linear-gradient(135deg,var(--secondary) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.close-cart{cursor:pointer;font-weight:600;margin-bottom:1rem;display:inline-block;color:var(--accent);transition:color .2s ease}
+.close-cart:hover{color:var(--primary)}
+.checkout-btn{margin-top:1.2rem;background:linear-gradient(135deg,var(--secondary) 0%,var(--accent) 50%,#FFD700 100%);color:#1a1a1a;border:none;border-radius:12px;padding:.85rem;width:100%;font-weight:700;cursor:pointer;transition:all .3s ease;box-shadow:0 4px 12px rgba(212,175,55,.35);position:relative;overflow:hidden}
+.checkout-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:rgba(255,255,255,.3);transition:left .5s ease}
+.checkout-btn:active::before{left:100%}
+.checkout-btn:active{transform:scale(0.98)}
+.checkout-btn:hover:not(:disabled){transform:scale(1.02);box-shadow:0 6px 20px rgba(212,175,55,.45)}
+.checkout-btn:disabled{opacity:.6;cursor:not-allowed}
+.note{font-size:.75rem;color:#bfdbfe;margin-top:.8rem;line-height:1.5}
+.status{padding:.5rem .9rem;background:linear-gradient(135deg,rgba(255,107,53,.15),rgba(59,130,246,.1));color:var(--accent);border-radius:12px;border:1.5px solid rgba(255,107,53,.4);font-size:.8rem;display:inline-block;font-weight:600}
+.modal-backdrop{position:fixed;inset:0;background:rgba(19,11,3,.6);display:none;align-items:center;justify-content:center;z-index:120;backdrop-filter:blur(3px)}
+.modal-backdrop.open{display:flex;animation:backdropFadeIn .3s ease-out}
+.modal{width:min(520px,92vw);background:linear-gradient(135deg,rgba(30,64,175,.4) 0%,rgba(15,23,42,.8) 100%);border-radius:20px;border:1px solid rgba(255,107,53,.3);padding:1.8rem;box-shadow:0 20px 60px rgba(255,107,53,.2);animation:modalSlideIn .4s cubic-bezier(.23,1,.32,1)}
+.modal h3{margin:0 0 .6rem;font-size:1.4rem;font-weight:700;color:var(--accent)}
+.modal p{margin:.4rem 0 1.2rem;color:#bfdbfe}
+.modal label{display:block;margin-bottom:.6rem;font-weight:600;color:#fff}
+.modal select{width:100%;padding:.7rem;border:1.5px solid rgba(255,107,53,.3);border-radius:12px;background:rgba(15,23,42,.5);margin-bottom:1rem;font-family:inherit;font-size:1rem;cursor:pointer;transition:all .2s ease;color:#fff}
+.modal select:focus{outline:none;border-color:var(--accent);background:rgba(30,64,175,.6);box-shadow:0 0 0 3px rgba(255,107,53,.2)}
+.modal-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;padding:1rem;background:rgba(30,64,175,.2);border-radius:12px;border:1px solid rgba(255,107,53,.3)}
+.modal-qty{display:flex;align-items:center;gap:.6rem;padding:.4rem .8rem;background:rgba(15,23,42,.5);border-radius:10px;border:1.5px solid rgba(255,107,53,.3)}
+.modal-qty button{border:none;background:transparent;padding:.1rem .5rem;cursor:pointer;font-size:1.1rem;background:linear-gradient(135deg,var(--secondary) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700;transition:all .2s ease}
+.modal-qty button:hover{opacity:.8}
+.modal-qty strong{font-weight:600}
+.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.ghost-btn{width:100%;padding:.75rem;border:1.5px solid rgba(255,107,53,.3);border-radius:12px;cursor:pointer;font-weight:700;background:transparent;color:var(--accent);transition:all .3s ease;position:relative;overflow:hidden}
+.ghost-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:rgba(255,107,53,.2);transition:left .4s ease}
+.ghost-btn:active::before{left:100%}
+.ghost-btn:active{transform:scale(0.98)}
+.ghost-btn:hover{border-color:var(--accent);background:rgba(255,107,53,.1);color:var(--accent)}
+@keyframes cardEnter{0%{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes backdropFadeIn{0%{background:rgba(19,11,3,0);opacity:0}to{background:rgba(19,11,3,.6);opacity:1}}
+@keyframes modalSlideIn{0%{opacity:0;transform:scale(.85) translateY(-20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes cartPulse{0%{transform:scale(1)}25%{transform:scale(1.3)}50%{transform:scale(1.15)}to{transform:scale(1)}}
+.card:nth-child(1){animation-delay:0s}
+.card:nth-child(2){animation-delay:.1s}
+.card:nth-child(3){animation-delay:.2s}
+.card:nth-child(4){animation-delay:.3s}
+.card:nth-child(5){animation-delay:.4s}
 @media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
+@media (max-width:600px){h1{font-size:1.5rem}.grid{grid-template-columns:1fr}.modal{padding:1.2rem}.social-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <header>
   <div class="container nav">
-    <div class="brand">🍽️ DIMDIMSUM <span class="pill">Live delivery mode</span></div>
+    <div class="brand">🍽️ DIMDIMSUM</div>
     <div style="display:flex;align-items:center;gap:.7rem;flex-wrap:wrap">
+      <span class="pill">⚡ Live delivery</span>
       <div class="cart-btn" onclick="toggleCart()">🛒 Order <span class="cart-count" id="cartCount">0</span></div>
     </div>
   </div>
 </header>
 <main class="container">
   <section class="hero">
-    <h1>Signature Foods by DIMDIMSUM</h1>
-    <p>A curated menu with our two best-selling signature dishes. Built to help customers choose quickly and order confidently.</p>
-    <div><span class="status">Today only: Burger House & Green Bowl</span></div>
+    <h1>✨ Signature Menu</h1>
+    <p>Handpicked favorites crafted with care. Fast, fresh, and ready for delivery.</p>
     <div class="hero-grid">
       <div>
-        <div class="status">Today only: Burger House & Green Bowl</div>
+        <p style="color:var(--text-light);margin:0">Our best-selling signature dishes curated just for you. Each meal is prepared fresh and arrives at your door in minutes.</p>
       </div>
       <div class="mini-panel">
-        <strong>Delivery details</strong>
-        <div style="height:.55rem"></div>
-        <input id="customerNameInput" placeholder="Enter your WhatsApp name" value="">
-        <div style="height:.45rem"></div>
-        <input id="addressInput" placeholder="Enter detailed address" value="">
-        <div style="height:.55rem"></div>
-        <span class="status" id="etaStatus">Estimated arrival: 30 mins</span>
+        <strong>📍 Delivery Details</strong>
+        <input id="customerNameInput" placeholder="Your WhatsApp name" value="">
+        <input id="addressInput" placeholder="Detailed delivery address" value="">
+        <div style="margin-top:.8rem;padding:.8rem;background:rgba(255,107,53,.1);border-radius:10px">
+          <div style="font-size:.75rem;color:var(--text-light);margin-bottom:.3rem">Estimated arrival</div>
+          <span id="etaStatus" style="font-weight:700;color:var(--primary);font-size:1.1rem">⏱️ 25 mins</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:linear-gradient(135deg,rgba(30,64,175,.15) 0%,rgba(255,107,53,.08) 100%);border-radius:20px;padding:2.5rem;margin:3rem auto;max-width:1000px">
+    <h2 style="text-align:center;margin:0 0 2rem;font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--accent) 0%,var(--secondary) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">✨ Why Choose Us?</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem">
+      <div style="text-align:center;padding:1.5rem;background:linear-gradient(135deg,rgba(30,64,175,.2) 0%,rgba(59,130,246,.1) 100%);border-radius:16px;border:1px solid rgba(255,107,53,.3);transition:all .3s ease" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 24px rgba(255,107,53,.2)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 12px rgba(255,107,53,.05)'">
+        <div style="font-size:2.5rem;margin-bottom:.8rem">🔥</div>
+        <h4 style="margin:.5rem 0;color:#fff;font-weight:700">Fresh Daily</h4>
+        <p style="color:#bfdbfe;font-size:.9rem;margin:0">Made fresh every hour with premium ingredients</p>
+      </div>
+      <div style="text-align:center;padding:1.5rem;background:linear-gradient(135deg,rgba(30,64,175,.2) 0%,rgba(59,130,246,.1) 100%);border-radius:16px;border:1px solid rgba(255,107,53,.3);transition:all .3s ease" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 24px rgba(255,107,53,.2)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 12px rgba(255,107,53,.05)'">
+        <div style="font-size:2.5rem;margin-bottom:.8rem">⚡</div>
+        <h4 style="margin:.5rem 0;color:#fff;font-weight:700">Super Fast</h4>
+        <p style="color:#bfdbfe;font-size:.9rem;margin:0">Average delivery in 20-30 minutes to your door</p>
+      </div>
+      <div style="text-align:center;padding:1.5rem;background:linear-gradient(135deg,rgba(30,64,175,.2) 0%,rgba(59,130,246,.1) 100%);border-radius:16px;border:1px solid rgba(255,107,53,.3);transition:all .3s ease" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 24px rgba(255,107,53,.2)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 12px rgba(255,107,53,.05)'">
+        <div style="font-size:2.5rem;margin-bottom:.8rem">💰</div>
+        <h4 style="margin:.5rem 0;color:#fff;font-weight:700">Best Price</h4>
+        <p style="color:#bfdbfe;font-size:.9rem;margin:0">Quality dishes at affordable prices, every day</p>
       </div>
     </div>
   </section>
@@ -107,11 +170,21 @@ header{background:rgba(255,253,250,.92);border-bottom:1px solid var(--border);po
   <section class="grid" id="foodGrid"></section>
 
   <section class="social">
-    <h3>Connect your shop to social channels</h3>
+    <h3>📱 Connect & Follow</h3>
+    <p>Stay updated with our latest dishes and promotions on your favorite platforms.</p>
     <div class="social-grid">
-      <a href="https://www.tiktok.com/@freshbite" target="_blank" rel="noopener noreferrer">🎵 Connect TikTok<br><small>Promote menu videos & live selling.</small></a>
-      <a href="https://www.instagram.com/freshbite" target="_blank" rel="noopener noreferrer">📸 Connect Instagram<br><small>Share reels, stories, and catalog.</small></a>
-      <a href="https://wa.me/6289504378484" target="_blank" rel="noopener noreferrer">💬 Connect WhatsApp<br><small>Receive order chat and customer support.</small></a>
+      <a href="https://www.tiktok.com/@freshbite" target="_blank" rel="noopener noreferrer">
+        <div style="font-size:1.8rem;margin-bottom:.4rem">🎵</div>
+        <strong>TikTok</strong><br><small>Trending videos & live selling</small>
+      </a>
+      <a href="https://www.instagram.com/freshbite" target="_blank" rel="noopener noreferrer">
+        <div style="font-size:1.8rem;margin-bottom:.4rem">📸</div>
+        <strong>Instagram</strong><br><small>Reels & behind-the-scenes</small>
+      </a>
+      <a href="https://wa.me/6289504378484" target="_blank" rel="noopener noreferrer">
+        <div style="font-size:1.8rem;margin-bottom:.4rem">💬</div>
+        <strong>WhatsApp</strong><br><small>Order & instant support</small>
+      </a>
     </div>
   </section>
 </main>
@@ -120,53 +193,60 @@ header{background:rgba(255,253,250,.92);border-bottom:1px solid var(--border);po
   <div class="modal" onclick="event.stopPropagation()">
     <h3 id="modalFoodName"></h3>
     <p id="modalFoodDesc"></p>
-    <label for="variantSelect"><strong>Variant</strong></label>
+    <label for="variantSelect"><strong>🎯 Choose Variant</strong></label>
     <select id="variantSelect" onchange="updateModalPrice()"></select>
     <div class="modal-row">
-      <div class="modal-qty">
-        <button onclick="changeModalQty(-1)">-</button>
-        <strong id="modalQty">1</strong>
-        <button onclick="changeModalQty(1)">+</button>
+      <div>
+        <div style="font-size:.75rem;color:var(--text-light);margin-bottom:.4rem">Quantity</div>
+        <div class="modal-qty">
+          <button onclick="changeModalQty(-1)">−</button>
+          <strong id="modalQty">1</strong>
+          <button onclick="changeModalQty(1)">+</button>
+        </div>
       </div>
-      <strong id="modalPrice"></strong>
+      <div style="text-align:right">
+        <div style="font-size:.75rem;color:var(--text-light);margin-bottom:.4rem">Total Price</div>
+        <div style="font-size:1.4rem;font-weight:800;color:var(--primary)" id="modalPrice"></div>
+      </div>
     </div>
     <div class="modal-actions">
       <button class="ghost-btn" onclick="closeFoodModal()">Cancel</button>
-      <button class="add-btn" onclick="confirmAddFromModal()">Add to cart</button>
+      <button class="add-btn" onclick="confirmAddFromModal()">Add to Order</button>
     </div>
   </div>
 </div>
 
 <div class="cart-panel" id="cartPanel">
-  <div class="close-cart" onclick="toggleCart()">← Close</div>
-  <h3>Your order</h3>
+  <div class="close-cart" onclick="toggleCart()">← Back</div>
+  <h3>🛒 Your Order</h3>
   <div id="cartItems"></div>
-  <div class="total" id="cartTotal">Total: $0</div>
-  <button class="checkout-btn" id="checkoutBtn" onclick="checkoutViaWhatsApp()">Place order (auto WhatsApp)</button>
-  <p class="note" id="checkoutNote">Tip: fill in your WhatsApp name and detailed address before checkout so your order message is complete.</p>
+  <div class="total" id="cartTotal">Total: Rp0</div>
+  <button class="checkout-btn" id="checkoutBtn" onclick="checkoutViaWhatsApp()">📲 Send via WhatsApp</button>
+  <p class="note">💡 <strong>Pro tip:</strong> Fill in your name and address above to send a complete order message automatically.</p>
 </div>
 
 <script>
 const menuData = [
   {
     id:1,
-    name:"Burger House",
-    category:"Burger",
+    name:"Dimsum Goreng Keju",
+    category:"Dimsum",
     description:"Juicy grilled beef patty with lettuce, tomato, and house sauce on a toasted brioche bun.",
-    price:20,
+    price:15,
     rating:4.7,
     eta:20,
     orders:320,
     img:"https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
     variants:[
-      {name:"Regular", priceDelta:0},
-      {name:"Double Patty", priceDelta:6}
+      {name:"3 pieces", priceDelta:-5},
+      {name:"4 pieces", priceDelta:0},
+      {name:"6 pieces", priceDelta:8}
     ]
   },
   {
     id:2,
-    name:"Green Bowl",
-    category:"Healthy",
+    name:"Dimsum Mentai",
+    category:"Dimsum",
     description:"Fresh greens, avocado, quinoa, and crunchy toppings with a light citrus dressing.",
     price:10,
     rating:4.9,
@@ -174,10 +254,12 @@ const menuData = [
     orders:280,
     img:"https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
     variants:[
-      {name:"Classic", priceDelta:0},
-      {name:"Extra Avocado", priceDelta:3}
+     {name:"3 pieces", priceDelta:-5},
+      {name:"4 pieces", priceDelta:0},
+      {name:"6 pieces", priceDelta:8}
     ]
-  }
+  },
+  
 ];
 
 let cart = [];
@@ -273,6 +355,13 @@ function confirmAddFromModal(){
 
   closeFoodModal();
   updateCart();
+  
+  // Animate cart badge
+  const cartCount = document.getElementById("cartCount");
+  cartCount.style.animation = 'none';
+  setTimeout(() => {
+    cartCount.style.animation = 'cartPulse .5s cubic-bezier(.23,1,.32,1)';
+  }, 10);
 }
 
 function changeQtyByIndex(index, delta){
@@ -335,7 +424,6 @@ function checkoutViaWhatsApp(){
   }
 
   const checkoutBtn = document.getElementById("checkoutBtn");
-  const checkoutNote = document.getElementById("checkoutNote");
   const customerName = document.getElementById("customerNameInput").value.trim();
   const address = document.getElementById("addressInput").value.trim();
 
@@ -346,14 +434,14 @@ function checkoutViaWhatsApp(){
 
   const total = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
   const orderText = [
-    "Hi FreshBite!",
+    "DIMDIMSUM!",
     "I want to order:",
     ...cart.map(item => `- ${item.name} x${item.qty} (${formatIDRFromUSD(item.qty * item.price)})`),
     "",
     `Total: ${formatIDRFromUSD(total)}`,
-    `Name: ${customerName}`,
+    `Customer Name: ${customerName}`,
     `Detailed Address: ${address}`,
-    "Ordered from FreshBite web app."
+    "Ordered from DIMDIMSUM web app."
   ].join("\n");
 
   const whatsappNumber = "6289504378484";
@@ -361,7 +449,6 @@ function checkoutViaWhatsApp(){
 
   checkoutBtn.disabled = true;
   checkoutBtn.innerText = "Redirecting to WhatsApp...";
-  checkoutNote.innerText = "Opening WhatsApp automatically so you can send your order now.";
 
   setTimeout(() => {
     window.location.href = whatsappUrl;
